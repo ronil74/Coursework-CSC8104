@@ -117,8 +117,8 @@ public class ContactService {
         //Create client service instance to make REST requests to upstream service
         try {
             //Removed temporarily due to non-existing AreaService
-             Area area = areaService.getAreaById(Integer.parseInt(contact.getPhoneNumber().substring(1, 4)));
-             contact.setState(area.getState());
+//             Area area = areaService.getAreaById(Integer.parseInt(contact.getPhoneNumber().substring(1, 4)));
+//             contact.setState(area.getState());
         } catch (ClientErrorException e) {
             if (e.getResponse().getStatusInfo() == Response.Status.NOT_FOUND) {
                 throw new InvalidAreaCodeException("The area code provided does not exist", e);

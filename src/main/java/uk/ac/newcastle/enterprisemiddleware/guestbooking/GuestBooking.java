@@ -1,0 +1,44 @@
+package uk.ac.newcastle.enterprisemiddleware.guestbooking;
+import uk.ac.newcastle.enterprisemiddleware.booking.*;
+import uk.ac.newcastle.enterprisemiddleware.customer.*;
+import uk.ac.newcastle.enterprisemiddleware.flight.*;
+
+import javax.validation.constraints.NotNull;
+
+public class GuestBooking{
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
+
+    @NotNull
+    private Booking booking;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    @NotNull
+    private Customer customer;
+
+//    public Flight getFlight() {
+//        return flight;
+//    }
+//
+//    public void setFlight(Flight flight) {
+//        this.flight = flight;
+//    }
+//
+//    @NotNull
+//    private Flight flight;
+
+
+}
