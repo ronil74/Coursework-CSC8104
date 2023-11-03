@@ -48,9 +48,9 @@ public class GuestBookingRestService {
     @POST
     @Operation(summary = "Addition of new booking")
     @APIResponses(value = {
-            @APIResponse(responseCode = "201", description = "Contact created successfully."),
-            @APIResponse(responseCode = "400", description = "Invalid Contact supplied in request body"),
-            @APIResponse(responseCode = "409", description = "Contact supplied in request body conflicts with an existing Contact"),
+            @APIResponse(responseCode = "201", description = "Guest Booking created successfully."),
+            @APIResponse(responseCode = "400", description = "Invalid Guest Booking supplied in request body"),
+            @APIResponse(responseCode = "409", description = "Booking/Customer supplied in request body conflicts with an existing Booking"),
             @APIResponse(responseCode = "500", description = "An unexpected error occurred whilst processing the request")
     })
 

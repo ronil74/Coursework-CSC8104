@@ -2,6 +2,7 @@ package uk.ac.newcastle.enterprisemiddleware.booking;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import uk.ac.newcastle.enterprisemiddleware.area.InvalidAreaCodeException;
+import uk.ac.newcastle.enterprisemiddleware.customer.CustomerValidator;
 import uk.ac.newcastle.enterprisemiddleware.flight.Flight;
 
 import javax.enterprise.context.Dependent;
@@ -22,6 +23,8 @@ public class BookingService {
 
 //    @Inject
 //    ContactValidator validator;
+    @Inject
+    BookingValidator validator;
 
     @Inject
     BookingRepository crud;
@@ -37,8 +40,13 @@ public class BookingService {
 //        return BookingRepository.findByDateAndFlightId(flightId, date);
 //    }
 
+//    public Booking findByDateAndFlightIdAndCustomerId(Long flightId, Date date,Long customerId){
+//        return findByDateAndFlightIdAndCustomerId(flightId,date,customerId);
+//    }
+
     public Booking create(Booking booking) throws Exception {
-        return crud.create(booking);
+        validator.validateBooking(booking);
+    return crud.create(booking);
     }
 
     public Booking delete(Booking booking) throws Exception {

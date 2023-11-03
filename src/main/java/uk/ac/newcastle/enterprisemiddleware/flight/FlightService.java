@@ -1,8 +1,6 @@
 package uk.ac.newcastle.enterprisemiddleware.flight;
 
-import org.eclipse.microprofile.rest.client.inject.RestClient;
-import uk.ac.newcastle.enterprisemiddleware.area.Area;
-import uk.ac.newcastle.enterprisemiddleware.area.AreaService;
+
 import uk.ac.newcastle.enterprisemiddleware.area.InvalidAreaCodeException;
 
 import javax.enterprise.context.Dependent;
@@ -20,8 +18,8 @@ public class FlightService {
     @Named("logger")
     Logger log;
 
-//    @Inject
-//    FlightValidator validator;
+    @Inject
+    FlightValidator validator;
 
     @Inject
     FlightRepository crud;
@@ -38,7 +36,19 @@ public class FlightService {
         return crud.findByFlightNumber(flightNumber);
     }
 
-    public Flight create(Flight flight) {
+    public Flight create(Flight flight) throws Exception{
+        validator.validateFlight(flight);
+        try {
+            //Removed temporarily due to non-existing AreaService
+//             Area area = areaService.getAreaById(Integer.parseInt(contact.getPhoneNumber().substring(1, 4)));
+//             contact.setState(area.getState());
+        } catch (ClientErrorException e) {
+            if (e.getResponse().getStatusInfo() == Response.Status.NOT_FOUND) {
+                throw new InvalidAreaCodeException("does not exist", e);
+            } else {
+                throw e;
+            }
+        }
         return crud.create(flight);
 
     }

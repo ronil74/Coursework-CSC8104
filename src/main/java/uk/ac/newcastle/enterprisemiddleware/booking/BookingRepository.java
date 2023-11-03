@@ -1,5 +1,7 @@
 package uk.ac.newcastle.enterprisemiddleware.booking;
 
+import uk.ac.newcastle.enterprisemiddleware.customer.Customer;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,10 +30,20 @@ public class BookingRepository {
         return em.find(Booking.class, id);
     }
 
-//     public Booking findByDateAndFlightId(Long flightId, Date date) {
+//      Booking findByDateAndFlightId(Long flightId, Date date) {
 //        TypedQuery<Booking> namedQuery = em.createNamedQuery(Booking.FIND_BY_DATE_AND_FLIGHT_ID, Booking.class)
 //                .setParameter("flightId", flightId)
 //                .setParameter("bookingDate", date)
+//                .setMaxResults(1);
+//        List<Booking> resultList = namedQuery.getResultList();
+//        return resultList.isEmpty() ? null: resultList.get(0);
+//    }
+
+//    Booking findByDateAndFlightIdAndCustomerId(Long flightId, Date date, Long customerId) {
+//        TypedQuery<Booking> namedQuery = em.createNamedQuery(Booking.FIND_BY_DATE_AND_FLIGHT_ID, Booking.class)
+//                .setParameter("flightId", flightId)
+//                .setParameter("bookingDate", date)
+//                .setParameter("customerId",customerId )
 //                .setMaxResults(1);
 //        List<Booking> resultList = namedQuery.getResultList();
 //        return resultList.isEmpty() ? null: resultList.get(0);

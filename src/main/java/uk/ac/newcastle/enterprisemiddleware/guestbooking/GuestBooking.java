@@ -4,8 +4,20 @@ import uk.ac.newcastle.enterprisemiddleware.customer.*;
 import uk.ac.newcastle.enterprisemiddleware.flight.*;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class GuestBooking{
+public class GuestBooking implements Serializable {
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    @NotNull
+    private Customer customer;
 
     public Booking getBooking() {
         return booking;
@@ -18,16 +30,7 @@ public class GuestBooking{
     @NotNull
     private Booking booking;
 
-    public Customer getCustomer() {
-        return customer;
-    }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    @NotNull
-    private Customer customer;
 
 //    public Flight getFlight() {
 //        return flight;

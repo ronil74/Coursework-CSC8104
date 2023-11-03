@@ -16,7 +16,9 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = Booking.FIND_ALL, query = "SELECT c FROM Booking c ORDER BY c.id ASC"),
         @NamedQuery(name = Booking.FIND_BY_ID, query = "SELECT c FROM Booking c WHERE c.id = :id")
-//        @NamedQuery(name = Booking.FIND_BY_DATE_AND_FLIGHT_ID, query = "SELECT c FROM Booking c WHERE c.flightId = :flightId AND c.bookingDate = :bookingDate")
+//        @NamedQuery(name = Booking.FIND_BY_DATE_AND_FLIGHT_ID, query = "SELECT c FROM Booking c WHERE c.flightId = :flightId AND c.bookingDate = :bookingDate"),
+//        @NamedQuery(name = Booking.FIND_BY_DATE_AND_FLIGHT_ID_AND_CUSTOMER_ID, query = "SELECT c FROM Booking c WHERE c.flightId = :flightId AND c.bookingDate = :bookingDate AND c.customerId=:customerID")
+
 })
 @XmlRootElement
 @Table(name = "booking", uniqueConstraints = @UniqueConstraint(columnNames = {"flightId", "bookingDate" }))
@@ -28,6 +30,8 @@ public class Booking implements Serializable {
     public static final String FIND_ALL = "Booking.findAll";
     public static final String FIND_BY_ID = "Booking.findById";
 //    public static final String FIND_BY_DATE_AND_FLIGHT_ID ="Booking.findByDateAndFlightId" ;
+//
+//    public static final String FIND_BY_DATE_AND_FLIGHT_ID_AND_CUSTOMER_ID ="Booking.findByDateAndFlightIdAndCustomerId" ;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +57,7 @@ public class Booking implements Serializable {
     @NotNull
 //    @Past(message = "Booking date could not be empty")
     @Column(name = "bookingdate")
-    @Future
+    @Future(message ="Date Of Booking can not be in the past")
     @Temporal(TemporalType.DATE)
     private Date bookingDate;
 

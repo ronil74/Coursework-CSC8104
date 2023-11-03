@@ -6,6 +6,7 @@ import uk.ac.newcastle.enterprisemiddleware.booking.Booking;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.transform.Source;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

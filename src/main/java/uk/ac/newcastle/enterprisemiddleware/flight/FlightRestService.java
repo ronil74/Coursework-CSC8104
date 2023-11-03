@@ -5,15 +5,20 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import uk.ac.newcastle.enterprisemiddleware.area.InvalidAreaCodeException;
 import uk.ac.newcastle.enterprisemiddleware.util.RestServiceException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 @Path("/flight")
@@ -89,7 +94,25 @@ public class FlightRestService {
             flight.setId(null);
             service.create(flight);
             builder = Response.status(Response.Status.CREATED).entity(flight);
-        } catch (Exception e) {
+        }  catch (UniqueFlightNumberException e) {
+            // Handle the unique constraint violation
+            Map<String, String> responseObj = new HashMap<>();
+            responseObj.put("flightNumber", "That Flight Number is already in use, please use a unique Flight Number");
+            throw new RestServiceException("Bad Request", responseObj, Response.Status.CONFLICT, e);
+        } catch(UniqueDepartureAndDestinationException e){
+            Map<String, String> responseObj = new HashMap<>();
+            responseObj.put("Destination", "Error check whether departure and destination are not same");
+            throw new RestServiceException("Bad Request", responseObj, Response.Status.CONFLICT, e);
+        }catch (ConstraintViolationException ce) {
+            //Handle bean validation issues
+            Map<String, String> responseObj = new HashMap<>();
+
+            for (ConstraintViolation<?> violation : ce.getConstraintViolations()) {
+                responseObj.put(violation.getPropertyPath().toString(), violation.getMessage());
+            }
+            throw new RestServiceException("Bad Request", responseObj, Response.Status.BAD_REQUEST, ce);
+
+        }catch (Exception e) {
             // Handle generic exceptions
             throw new RestServiceException(e);
         }
@@ -128,7 +151,25 @@ public class FlightRestService {
 
             builder = Response.noContent();
 
-        } catch (Exception e) {
+        }  catch (UniqueFlightNumberException e) {
+            // Handle the unique constraint violation
+            Map<String, String> responseObj = new HashMap<>();
+            responseObj.put("flightNumber", "That Flight Number is already in use, please use a unique Flight Number");
+            throw new RestServiceException("Bad Request", responseObj, Response.Status.CONFLICT, e);
+        } catch(UniqueDepartureAndDestinationException e){
+            Map<String, String> responseObj = new HashMap<>();
+            responseObj.put("Destination", "Error check whether departure and destination are not same");
+            throw new RestServiceException("Bad Request", responseObj, Response.Status.CONFLICT, e);
+        }catch (ConstraintViolationException ce) {
+            //Handle bean validation issues
+            Map<String, String> responseObj = new HashMap<>();
+
+            for (ConstraintViolation<?> violation : ce.getConstraintViolations()) {
+                responseObj.put(violation.getPropertyPath().toString(), violation.getMessage());
+            }
+            throw new RestServiceException("Bad Request", responseObj, Response.Status.BAD_REQUEST, ce);
+
+        }catch (Exception e) {
             // Handle generic exceptions
             throw new RestServiceException(e);
         }
