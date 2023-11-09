@@ -8,24 +8,13 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
-import org.jboss.resteasy.reactive.Cache;
-import uk.ac.newcastle.enterprisemiddleware.area.InvalidAreaCodeException;
 import uk.ac.newcastle.enterprisemiddleware.util.RestServiceException;
-
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.persistence.NoResultException;
 import javax.transaction.*;
-import javax.transaction.NotSupportedException;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
+
 
 @Path("/api")
 @Consumes(MediaType.APPLICATION_JSON)

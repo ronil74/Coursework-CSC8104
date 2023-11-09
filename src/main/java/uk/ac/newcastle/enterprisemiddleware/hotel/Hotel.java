@@ -1,11 +1,13 @@
 package uk.ac.newcastle.enterprisemiddleware.hotel;
+import uk.ac.newcastle.enterprisemiddleware.booking.*;
+import uk.ac.newcastle.enterprisemiddleware.customer.Customer;
 
+
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
 
 public class Hotel implements Serializable {
-
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
@@ -17,47 +19,37 @@ public class Hotel implements Serializable {
 
     private Long id;
 
-    public String getHotelName() {
-        return hotelName;
+    public String getName() {
+        return name;
     }
 
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    private String hotelName;
+    @NotNull
+    private String name;
 
-    public Long getCustomerId() {
-        return customerId;
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
-    @Override
-    public String toString() {
-        return "Hotel{" +
-                "id=" + id +
-                ", hotelName='" + hotelName + '\'' +
-                ", customerId=" + customerId +
-                ", bookingdate=" + bookingdate +
-                '}';
+    @NotNull
+    private String phonenumber;
+
+    public String getPostcode() {
+        return postcode;
+
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Hotel hotel = (Hotel) o;
-        return Objects.equals(id, hotel.id) && Objects.equals(hotelName, hotel.hotelName) && Objects.equals(customerId, hotel.customerId) && Objects.equals(bookingdate, hotel.bookingdate);
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, hotelName, customerId, bookingdate);
-    }
-
-    private Long customerId;
-    private Date bookingdate;
+    @NotNull
+    private String postcode;
 }

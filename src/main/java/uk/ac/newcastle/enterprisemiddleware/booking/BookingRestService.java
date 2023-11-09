@@ -111,6 +111,15 @@ public class BookingRestService {
         Booking.setCustomer(customer);
         try {
             service.create(Booking);
+        } catch (ConstraintViolationException ce) {
+            //Handle bean validation issues
+            Map<String, String> responseObj = new HashMap<>();
+
+            for (ConstraintViolation<?> violation : ce.getConstraintViolations()) {
+                responseObj.put(violation.getPropertyPath().toString(), violation.getMessage());
+            }
+            throw new RestServiceException("Bad Request", responseObj, Response.Status.BAD_REQUEST, ce);
+
         } catch (Exception e) {
             log.severe(" create booking " +
                     "[" + Booking + "] error");
@@ -151,7 +160,16 @@ public class BookingRestService {
 
             builder = Response.noContent();
 
-        } catch (Exception e) {
+        } catch (ConstraintViolationException ce) {
+            //Handle bean validation issues
+            Map<String, String> responseObj = new HashMap<>();
+
+            for (ConstraintViolation<?> violation : ce.getConstraintViolations()) {
+                responseObj.put(violation.getPropertyPath().toString(), violation.getMessage());
+            }
+            throw new RestServiceException("Bad Request", responseObj, Response.Status.BAD_REQUEST, ce);
+
+        }catch (Exception e) {
             // Handle generic exceptions
             throw new RestServiceException(e);
         }

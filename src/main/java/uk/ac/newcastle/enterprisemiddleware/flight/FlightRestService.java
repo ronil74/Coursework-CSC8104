@@ -36,9 +36,11 @@ public class FlightRestService {
     @Path("/findAllFlights")
     @Operation(summary = "Fetch all flights", description = "Returns a JSON array of all stored flight objects.")
     public Response findAllFlights() {
-        List<Flight> flights;
-        flights = service.findAllFlights();
-        return Response.ok(flights).build();
+        List<Flight> flight;
+        flight = service.findAllFlights();
+        System.out.println("Hello");
+
+        return Response.ok(flight).build();
     }
 
 
@@ -160,7 +162,8 @@ public class FlightRestService {
             Map<String, String> responseObj = new HashMap<>();
             responseObj.put("Destination", "Error check whether departure and destination are not same");
             throw new RestServiceException("Bad Request", responseObj, Response.Status.CONFLICT, e);
-        }catch (ConstraintViolationException ce) {
+        }
+        catch (ConstraintViolationException ce) {
             //Handle bean validation issues
             Map<String, String> responseObj = new HashMap<>();
 
@@ -169,7 +172,8 @@ public class FlightRestService {
             }
             throw new RestServiceException("Bad Request", responseObj, Response.Status.BAD_REQUEST, ce);
 
-        }catch (Exception e) {
+        }
+        catch (Exception e) {
             // Handle generic exceptions
             throw new RestServiceException(e);
         }

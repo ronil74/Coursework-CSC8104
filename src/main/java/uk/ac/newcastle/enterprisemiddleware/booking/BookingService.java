@@ -32,7 +32,7 @@ public class BookingService {
     List<Booking> findAll() {
         return crud.findAll();
     }
-    Booking findById(Long id) {
+    public Booking findById(Long id) {
         return crud.findById(id);
     }
 

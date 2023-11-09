@@ -1,10 +1,14 @@
 package uk.ac.newcastle.enterprisemiddleware.taxi;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
+import uk.ac.newcastle.enterprisemiddleware.booking.*;
+import uk.ac.newcastle.enterprisemiddleware.customer.Customer;
 
+
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 public class Taxi implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     public Long getId() {
         return id;
     }
@@ -16,58 +20,43 @@ public class Taxi implements Serializable {
     private Long id;
 
 
-    public String getTaxiRegistrationNumber() {
-        return taxiRegistrationNumber;
+    public String getTaxiId() {
+        return taxiId;
     }
 
-    public void setTaxiRegistrationNumber(String taxiRegistrationNumber) {
-        this.taxiRegistrationNumber = taxiRegistrationNumber;
+    public void setTaxiId(String taxiId) {
+        this.taxiId = taxiId;
     }
 
-    private String taxiRegistrationNumber;
+    @NotNull
+    private String taxiId;
 
-    public Long getCustomerId() {
-        return customerId;
+    public String getTaxiRegistration() {
+        return taxiRegistration;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setTaxiRegistration(String taxiRegistration) {
+        this.taxiRegistration = taxiRegistration;
     }
 
-    @Override
-    public String toString() {
-        return "Taxi{" +
-                "id=" + id +
-                ", taxiRegistrationNumber='" + taxiRegistrationNumber + '\'' +
-                ", customerId=" + customerId +
-                ", bookingDate=" + bookingDate +
-                '}';
+    @NotNull
+    private String taxiRegistration;
+
+
+    public int getNoOfSeats() {
+        return noOfSeats;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Taxi taxi = (Taxi) o;
-        return Objects.equals(id, taxi.id) && Objects.equals(taxiRegistrationNumber, taxi.taxiRegistrationNumber) && Objects.equals(customerId, taxi.customerId) && Objects.equals(bookingDate, taxi.bookingDate);
+    public void setNoOfSeats(int noOfSeats) {
+        this.noOfSeats = noOfSeats;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, taxiRegistrationNumber, customerId, bookingDate);
-    }
+    @NotNull
+    private int noOfSeats;
 
-    private Long customerId;
 
-    public Date getBookingDate() {
-        return bookingDate;
-    }
 
-    public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate;
-    }
 
-    private Date bookingDate;
 
 
 }

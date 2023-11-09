@@ -106,4 +106,15 @@ public class Flight implements Serializable {
     public int hashCode() {
         return Objects.hash(flightNumber);
     }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", flightNumber='" + flightNumber + '\'' +
+                ", booking=" + booking +
+                ", departure='" + departure + '\'' +
+                ", destination='" + destination + '\'' +
+                '}';
+    }
 }

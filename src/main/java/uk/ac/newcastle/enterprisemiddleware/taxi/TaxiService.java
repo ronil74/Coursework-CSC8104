@@ -1,8 +1,8 @@
 package uk.ac.newcastle.enterprisemiddleware.taxi;
 
-
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-
+import uk.ac.newcastle.enterprisemiddleware.hotel.Hotel;
+import uk.ac.newcastle.enterprisemiddleware.hotel.HotelBooking;
 
 import javax.ws.rs.*;
 import java.util.List;
@@ -10,18 +10,22 @@ import java.util.List;
 @Path("/taxi")
 @RegisterRestClient(configKey = "taxi-api")
 public interface TaxiService {
+
+
     @GET
-    List<Taxi> getTaxi();
+    List<Taxi> taxi();
 
     @GET
     @Path("/{id:[0-9]+}")
-    Taxi getTaxiById(@PathParam("id") int id);
+    Taxi getTaxiById(@PathParam("id") long id);
 
     @POST
-    Taxi createTaxiBooking(Taxi taxi);
+    Taxi create(Taxi taxi);
 
     @DELETE
     @Path("/{id:[0-9]+}")
-    Taxi deleteTaxiBooking(@PathParam("id") int id);
+    Hotel delete(@PathParam("id") long id);
+
+
 
 }
