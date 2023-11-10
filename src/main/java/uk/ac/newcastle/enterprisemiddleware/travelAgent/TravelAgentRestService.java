@@ -130,9 +130,9 @@ public class TravelAgentRestService {
             travelAgentBooking.setId(null);
             travelAgentBooking.setCustomerId(travelAgent.getCustomer().getId());
             System.out.println(travelAgent.getCustomer().getId());
-            travelAgentBooking.setFlightId(booking.getFlightId());
+            travelAgentBooking.setFlightId(booking.getId());
             System.out.println(travelAgent.getFlight().getFlightId());
-            travelAgentBooking.setHotelId(hotelBooking.getHotelId());
+            travelAgentBooking.setHotelId(hotelBooking.getId());
 //            travelAgentBooking.setTaxiId(taxiBooking.getTaxiId());
 //            travelAgentBooking.setTaxiId(1L);
 
@@ -150,6 +150,7 @@ public class TravelAgentRestService {
 
 
     @DELETE
+    @Path("/deleteTravelAgentBooking/{id:[0-9]+}")
     @Operation(description = "Delete TravelAgent to the database")
     @APIResponses(value = {
             @APIResponse(responseCode = "201", description = "TravelAgent delete successfully.")
@@ -159,17 +160,24 @@ public class TravelAgentRestService {
             @Parameter
             Long id) {
         TravelAgentBooking travelAgentBooking = travelAgentService.findById(id);
+        System.out.println(travelAgentService.findById(id));
         Customer customer = customerService.findAllCustomersById(travelAgentBooking.getCustomerId());
         if (customer == null) {
-            throw new RestServiceException("TravelAgent not exsit", Response.Status.BAD_REQUEST);
+            throw new RestServiceException("TravelAgent not exist", Response.Status.BAD_REQUEST);
         }
         Response.ResponseBuilder builder;
 
         try {
 //            taxiBookingService.deleteTaxiBooking(travelAgentBooking.getTaxiId());
-            hotelBookingService.deleteHotelBooking(travelAgentBooking.getHotelId());
+            System.out.println("172 line");
+            System.out.println(travelAgentBooking.getFlightId());
             Booking booking=bookingService.findById(travelAgentBooking.getFlightId());
+            System.out.println(booking);
             bookingService.delete(booking);
+            System.out.println("175 line");
+            hotelBookingService.deleteHotelBooking(travelAgentBooking.getHotelId());
+            System.out.println("179 line");
+
 
             travelAgentService.delete(travelAgentBooking);
 

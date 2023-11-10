@@ -45,10 +45,11 @@ public class TravelAgentRepository {
     }
 
     TravelAgentBooking delete(TravelAgentBooking travelAgentBooking) throws Exception {
+
         if (travelAgentBooking.getId() != null) {
             em.remove(em.merge(travelAgentBooking)); //delete from database
         } else {
-            log.info("TrvaleAgentRepository.delete() - No ID was found so can't Delete.");
+            log.info("TravelAgentRepository.delete() - No ID was found so can't Delete.");
         }
 
         return travelAgentBooking;

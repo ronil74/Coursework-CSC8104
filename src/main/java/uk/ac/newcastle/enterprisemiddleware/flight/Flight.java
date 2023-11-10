@@ -112,7 +112,6 @@ public class Flight implements Serializable {
         return "Flight{" +
                 "id=" + id +
                 ", flightNumber='" + flightNumber + '\'' +
-                ", booking=" + booking +
                 ", departure='" + departure + '\'' +
                 ", destination='" + destination + '\'' +
                 '}';
