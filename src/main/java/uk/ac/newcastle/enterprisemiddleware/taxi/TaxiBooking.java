@@ -1,5 +1,6 @@
 package uk.ac.newcastle.enterprisemiddleware.taxi;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -18,15 +19,16 @@ public class TaxiBooking implements Serializable {
     private Long id;
 
 
-    public String getTaxiRegistrationNumber() {
-        return taxiRegistrationNumber;
+    public Long getTaxiId() {
+        return taxiId;
     }
 
-    public void setTaxiRegistrationNumber(String taxiRegistrationNumber) {
-        this.taxiRegistrationNumber = taxiRegistrationNumber;
+    public void setTaxiId(Long taxiId) {
+        this.taxiId = taxiId;
     }
 
-    private String taxiRegistrationNumber;
+
+    private Long taxiId;
 
     public Long getCustomerId() {
         return customerId;
@@ -38,14 +40,13 @@ public class TaxiBooking implements Serializable {
 
     @Override
     public String toString() {
-        return "Taxi{" +
+        return "TaxiBooking{" +
                 "id=" + id +
-                ", taxiRegistrationNumber='" + taxiRegistrationNumber + '\'' +
+                ", taxiId='" + taxiId + '\'' +
                 ", customerId=" + customerId +
                 ", bookingDate=" + bookingDate +
                 '}';
     }
-
 
     private Long customerId;
 

@@ -15,7 +15,6 @@ public interface TaxiBookingService {
     TaxiBooking getTaxiById(@PathParam("id") long id);
 
     @POST
-    @Path("booking/addBooking")
     TaxiBooking createTaxiBooking(TaxiBooking taxiBooking);
 
     @DELETE

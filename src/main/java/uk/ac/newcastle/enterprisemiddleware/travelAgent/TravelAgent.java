@@ -47,16 +47,16 @@ public class TravelAgent implements Serializable {
     private HotelBooking hotelBooking;
 
 
-    public TaxiBooking getTaxiBooking() {
-        return taxiBooking;
-    }
-
-    public void setTaxiBooking(TaxiBooking taxiBooking) {
-        this.taxiBooking = taxiBooking;
-    }
-
-    @NotNull
-    private TaxiBooking taxiBooking;
+//    public TaxiBooking getTaxiBooking() {
+//        return taxiBooking;
+//    }
+//
+//    public void setTaxiBooking(TaxiBooking taxiBooking) {
+//        this.taxiBooking = taxiBooking;
+//    }
+//
+//    @NotNull
+//    private TaxiBooking taxiBooking;
 
 
 

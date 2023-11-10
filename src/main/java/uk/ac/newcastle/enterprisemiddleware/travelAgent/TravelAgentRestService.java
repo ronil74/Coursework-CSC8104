@@ -22,7 +22,9 @@ import uk.ac.newcastle.enterprisemiddleware.util.RestServiceException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.NoResultException;
+import javax.transaction.SystemException;
 import javax.transaction.Transactional;
+import javax.transaction.UserTransaction;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.*;
@@ -53,6 +55,8 @@ public class TravelAgentRestService {
 
     @Inject
     TravelAgentService travelAgentService;
+    @Inject
+    private UserTransaction userTransaction;
 
     @GET
     @Operation(summary = "Fetch all TravelAgent", description = "Returns a JSON array of all stored TravelAgent objects.")
@@ -89,35 +93,56 @@ public class TravelAgentRestService {
     public Response createTravelAgent(
             @Parameter(description =
                     "JSON representation of TravelAgent object to be added to the database", required = true)
-            TravelAgent travelAgent) {
+            TravelAgent travelAgent) throws SystemException {
 
         if (travelAgent == null) {
             throw new RestServiceException("Bad Request", Response.Status.BAD_REQUEST);
         }
         if (travelAgent.getCustomer() == null) {
-            throw new RestServiceException("TravelAgent not exsit", Response.Status.BAD_REQUEST);
+            throw new RestServiceException("TravelAgent doesn't exsit", Response.Status.BAD_REQUEST);
         }
         Response.ResponseBuilder builder;
 
         try {
+
+            Customer customer =travelAgent.getCustomer() ;
+            System.out.println(customer.getEmail());
+            Customer newCustomer = customerService.findAllCustomersById(customer.getId());
+            System.out.println(customer.getEmail());
+            if (newCustomer == null) {
+                customer.setId(null);
+                newCustomer = customerService.create(customer);
+            }
+
             TravelAgentBooking travelAgentBooking = new TravelAgentBooking();
+
             Booking booking=travelAgent.getFlight();
             booking.setId(null);
+            booking.setCustomerId(customer.getId());
+            bookingService.create(booking);
 
+//            TaxiBooking taxiBooking=taxiBookingService.createTaxiBooking(travelAgent.getTaxiBooking());
             HotelBooking hotelBooking;
-            hotelBooking=hotelBookingService.createHotelBooking(travelAgent.getHotelBooking());
+            System.out.println(hotelBookingService.getHotelBooking());
+          hotelBooking=hotelBookingService.createHotelBooking(travelAgent.getHotelBooking());
 
-            TaxiBooking taxiBooking=taxiBookingService.createTaxiBooking(travelAgent.getTaxiBooking());
+
             travelAgentBooking.setId(null);
             travelAgentBooking.setCustomerId(travelAgent.getCustomer().getId());
-            travelAgentBooking.setFlightId(booking.getId());
-            travelAgentBooking.setHotelId(hotelBooking.getId());
-            travelAgentBooking.setTaxiId(taxiBooking.getId());
+            System.out.println(travelAgent.getCustomer().getId());
+            travelAgentBooking.setFlightId(booking.getFlightId());
+            System.out.println(travelAgent.getFlight().getFlightId());
+            travelAgentBooking.setHotelId(hotelBooking.getHotelId());
+//            travelAgentBooking.setTaxiId(taxiBooking.getTaxiId());
+//            travelAgentBooking.setTaxiId(1L);
 
             travelAgentBooking = travelAgentService.create(travelAgentBooking);
             builder = Response.status(Response.Status.CREATED).entity(travelAgentBooking);
+//            userTransaction.commit();
         } catch (Exception e) {
+//            userTransaction.rollback();
             e.printStackTrace();
+            System.out.println(e);
             throw new RestServiceException(e);
         }
         return builder.build();
@@ -141,7 +166,7 @@ public class TravelAgentRestService {
         Response.ResponseBuilder builder;
 
         try {
-            taxiBookingService.deleteTaxiBooking(travelAgentBooking.getTaxiId());
+//            taxiBookingService.deleteTaxiBooking(travelAgentBooking.getTaxiId());
             hotelBookingService.deleteHotelBooking(travelAgentBooking.getHotelId());
             Booking booking=bookingService.findById(travelAgentBooking.getFlightId());
             bookingService.delete(booking);

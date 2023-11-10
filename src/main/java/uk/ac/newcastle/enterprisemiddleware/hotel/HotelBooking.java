@@ -9,15 +9,15 @@ public class HotelBooking implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    private Long id;
+    private int id;
 
 //    public String getHotelName() {
 //        return hotelName;
@@ -29,36 +29,36 @@ public class HotelBooking implements Serializable {
 //
 //    private String hotelName;
 
-    public Long getHotelId() {
+    public int getHotelId() {
         return hotelId;
     }
 
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(int hotelId) {
         this.hotelId = hotelId;
     }
 
-    private Long hotelId;
+    private int hotelId;
 
-    public Long getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Long customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
 
 
-    private Long customerId;
+    private int customerId;
 
-    public Date getBookingdate() {
-        return bookingdate;
+    public Date getBooking_Date() {
+        return booking_Date;
     }
 
-    public void setBookingdate(Date bookingdate) {
-        this.bookingdate = bookingdate;
+    public void setBooking_Date(Date booking_Date) {
+        this.booking_Date = booking_Date;
     }
 
-    private Date bookingdate;
+    private Date booking_Date;
 
 }

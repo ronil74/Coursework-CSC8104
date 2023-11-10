@@ -11,18 +11,18 @@ import java.util.List;
 public interface HotelBookingService {
 
     @GET
+    @Path("/all")
     List<HotelBooking> getHotelBooking();
 
     @GET
     @Path("/{id:[0-9]+}")
-    HotelBooking getHotelById(@PathParam("id") long id);
+    HotelBooking getHotelById(@PathParam("id") int id);
 
     @POST
-    @Path("/bookings")
     HotelBooking createHotelBooking(HotelBooking hotelBooking);
 
     @DELETE
     @Path("/{id:[0-9]+}")
-    HotelBooking deleteHotelBooking(@PathParam("id") long id);
+    HotelBooking deleteHotelBooking(@PathParam("id") int id);
 
 }

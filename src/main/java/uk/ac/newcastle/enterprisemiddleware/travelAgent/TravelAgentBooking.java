@@ -49,27 +49,27 @@ public class TravelAgentBooking implements Serializable{
     @Column(name = "customerId")
     private Long customerId;
 
-    public Long getHotelId() {
+    public int getHotelId() {
         return hotelId;
     }
 
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(int hotelId) {
         this.hotelId = hotelId;
     }
 
     @Column(name = "hotelId")
-    private Long hotelId;
-
-    public Long getTaxiId() {
-        return taxiId;
-    }
-
-    public void setTaxiId(Long taxiId) {
-        this.taxiId = taxiId;
-    }
-
-    @Column(name = "taxiId")
-    private Long taxiId;
+    private int hotelId;
+//
+//    public Long getTaxiId() {
+//        return taxiId;
+//    }
+//
+//    public void setTaxiId(Long taxiId) {
+//        this.taxiId = taxiId;
+//    }
+//
+//    @Column(name = "taxiId")
+//    private Long taxiId;
 
     public Long getFlightId() {
         return flightId;
