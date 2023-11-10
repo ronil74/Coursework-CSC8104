@@ -20,39 +20,29 @@ public class Taxi implements Serializable {
     private Long id;
 
 
-    public Long getTaxiId() {
-        return taxiId;
-    }
-
-    public void setTaxiId(Long taxiId) {
-        this.taxiId = taxiId;
-    }
-
-    @NotNull
-    private Long taxiId;
 
     public String getRegistration() {
-        return Registration;
+        return registration;
     }
 
-    public void Registration(String taxiRegistration) {
-        this.Registration = Registration;
-    }
-
-    @NotNull
-    private String Registration;
-
-
-    public int getNoOfSeats() {
-        return noOfSeats;
-    }
-
-    public void setNoOfSeats(int noOfSeats) {
-        this.noOfSeats = noOfSeats;
+    public void setRegistration(String registration) {
+        this.registration = registration;
     }
 
     @NotNull
-    private int noOfSeats;
+    private String registration;
+
+
+    public int getSeat() {
+        return seat;
+    }
+
+    public void setSeat(int seat) {
+        this.seat = seat;
+    }
+
+    @NotNull
+    private int seat;
 
 
 

@@ -153,7 +153,10 @@ public class TravelAgentRestService {
     @Path("/deleteTravelAgentBooking/{id:[0-9]+}")
     @Operation(description = "Delete TravelAgent to the database")
     @APIResponses(value = {
-            @APIResponse(responseCode = "201", description = "TravelAgent delete successfully.")
+            @APIResponse(responseCode = "204", description = "The Travel Agent has been successfully deleted"),
+            @APIResponse(responseCode = "400", description = "Invalid Travel Agent id supplied"),
+            @APIResponse(responseCode = "404", description = "Travel Agent with id not found"),
+            @APIResponse(responseCode = "500", description = "An unexpected error occurred whilst processing the request")
     })
     @Transactional
     public Response deleteTravelAgent(
@@ -168,7 +171,6 @@ public class TravelAgentRestService {
         Response.ResponseBuilder builder;
 
         try {
-//            taxiBookingService.deleteTaxiBooking(travelAgentBooking.getTaxiId());
             System.out.println("172 line");
             System.out.println(travelAgentBooking.getFlightId());
             Booking booking=bookingService.findById(travelAgentBooking.getFlightId());
@@ -177,6 +179,8 @@ public class TravelAgentRestService {
             System.out.println("175 line");
             hotelBookingService.deleteHotelBooking(travelAgentBooking.getHotelId());
             System.out.println("179 line");
+
+//            taxiBookingService.deleteTaxiBooking(travelAgentBooking.getTaxiId());
 
 
             travelAgentService.delete(travelAgentBooking);

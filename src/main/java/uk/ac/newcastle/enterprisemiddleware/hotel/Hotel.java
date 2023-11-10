@@ -30,26 +30,26 @@ public class Hotel implements Serializable {
     @NotNull
     private String name;
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
-    }
-
-    @NotNull
-    private String phonenumber;
-
-    public String getPostcode() {
-        return postcode;
-
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @NotNull
-    private String postcode;
+    private String phoneNumber;
+
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    @NotNull
+    private String postCode;
 }
