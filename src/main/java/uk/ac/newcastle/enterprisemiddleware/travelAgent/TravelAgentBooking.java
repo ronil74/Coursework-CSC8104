@@ -59,7 +59,7 @@ public class TravelAgentBooking implements Serializable{
 
     @Column(name = "hotelId")
     private int hotelId;
-//
+
 //    public Long getTaxiId() {
 //        return taxiId;
 //    }
@@ -70,6 +70,17 @@ public class TravelAgentBooking implements Serializable{
 //
 //    @Column(name = "taxiId")
 //    private Long taxiId;
+
+
+    public int getHotel2Id() {
+        return hotel2Id;
+    }
+
+    public void setHotel2Id(int hotel2Id) {
+        this.hotel2Id = hotel2Id;
+    }
+
+    private int hotel2Id;
 
     public Long getFlightId() {
         return flightId;
@@ -94,6 +105,18 @@ public class TravelAgentBooking implements Serializable{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Booking booking;
+
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    @Column(name="bookingDate")
+    private Date bookingDate;
 
 
 

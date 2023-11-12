@@ -1,5 +1,7 @@
 package uk.ac.newcastle.enterprisemiddleware.taxi;
 
+import uk.ac.newcastle.enterprisemiddleware.customer.Customer;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
@@ -19,36 +21,56 @@ public class TaxiBooking implements Serializable {
     private Long id;
 
 
-    public Long getTaxiId() {
-        return taxiId;
+//    public Long getTaxiId() {
+//        return taxiId;
+//    }
+//
+//    public void setTaxiId(Long taxiId) {
+//        this.taxiId = taxiId;
+//    }
+//
+//
+//    private Long taxiId;
+
+    public Taxi getTaxi() {
+        return taxi;
     }
 
-    public void setTaxiId(Long taxiId) {
-        this.taxiId = taxiId;
+    public void setTaxi(Taxi taxi) {
+        this.taxi = taxi;
     }
 
+    private Taxi taxi;
 
-    private Long taxiId;
-
-    public Long getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    @Override
-    public String toString() {
-        return "TaxiBooking{" +
-                "id=" + id +
-                ", taxiId='" + taxiId + '\'' +
-                ", customerId=" + customerId +
-                ", bookingDate=" + bookingDate +
-                '}';
-    }
+    private Customer customer;
 
-    private Long customerId;
+//    public Long getCustomerId() {
+//        return customerId;
+//    }
+//
+//    public void setCustomerId(Long customerId) {
+//        this.customerId = customerId;
+//    }
+//
+////    @Override
+////    public String toString() {
+////        return "TaxiBooking{" +
+////                "id=" + id +
+////                ", taxiId='" + taxiId + '\'' +
+////                ", customerId=" + customerId +
+////                ", bookingDate=" + bookingDate +
+////                '}';
+////    }
+//
+//    private Long customerId;
 
     public Date getBookingDate() {
         return bookingDate;

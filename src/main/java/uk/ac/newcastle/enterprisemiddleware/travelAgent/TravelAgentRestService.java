@@ -15,8 +15,12 @@ import uk.ac.newcastle.enterprisemiddleware.flight.Flight;
 import uk.ac.newcastle.enterprisemiddleware.flight.FlightService;
 import uk.ac.newcastle.enterprisemiddleware.hotel.HotelBooking;
 import uk.ac.newcastle.enterprisemiddleware.hotel.HotelBookingService;
+import uk.ac.newcastle.enterprisemiddleware.hotel2.HotelBooking2;
+import uk.ac.newcastle.enterprisemiddleware.hotel2.HotelBookingService2;
+import uk.ac.newcastle.enterprisemiddleware.taxi.Taxi;
 import uk.ac.newcastle.enterprisemiddleware.taxi.TaxiBooking;
 import uk.ac.newcastle.enterprisemiddleware.taxi.TaxiBookingService;
+import uk.ac.newcastle.enterprisemiddleware.taxi.TaxiService;
 import uk.ac.newcastle.enterprisemiddleware.util.RestServiceException;
 
 import javax.inject.Inject;
@@ -55,6 +59,9 @@ public class TravelAgentRestService {
 
     @Inject
     TravelAgentService travelAgentService;
+
+    @RestClient
+    HotelBookingService2 hotelBookingService2;
     @Inject
     private UserTransaction userTransaction;
 
@@ -120,8 +127,17 @@ public class TravelAgentRestService {
             booking.setId(null);
             booking.setCustomerId(customer.getId());
             bookingService.create(booking);
+            //Error Prone
+//            TaxiBooking taxiBooking= travelAgent.getTaxiBooking();
+//            taxiBooking.setCustomer(customer);
+//            taxiBooking.setTaxi(travelAgent.getTaxiBooking().getTaxi());
 
-//            TaxiBooking taxiBooking=taxiBookingService.createTaxiBooking(travelAgent.getTaxiBooking());
+//            taxiBookingService.createTaxiBooking(travelAgent.getTaxiBooking());
+
+            HotelBooking2 hotelBooking2;
+            hotelBooking2=hotelBookingService2.createHotelBooking2(travelAgent.getHotelBooking2());
+
+
             HotelBooking hotelBooking;
             System.out.println(hotelBookingService.getHotelBooking());
           hotelBooking=hotelBookingService.createHotelBooking(travelAgent.getHotelBooking());
@@ -133,8 +149,14 @@ public class TravelAgentRestService {
             travelAgentBooking.setFlightId(booking.getId());
             System.out.println(travelAgent.getFlight().getFlightId());
             travelAgentBooking.setHotelId(hotelBooking.getId());
-//            travelAgentBooking.setTaxiId(taxiBooking.getTaxiId());
+            System.out.println("error on 137 taxi");
+
+            travelAgentBooking.setBookingDate(travelAgent.getBookingDate());
+
+
+//            travelAgentBooking.setTaxiId(taxiBooking.getTaxi().getId());
 //            travelAgentBooking.setTaxiId(1L);
+            travelAgentBooking.setHotel2Id(hotelBooking2.getId());
 
             travelAgentBooking = travelAgentService.create(travelAgentBooking);
             builder = Response.status(Response.Status.CREATED).entity(travelAgentBooking);
@@ -180,6 +202,7 @@ public class TravelAgentRestService {
             hotelBookingService.deleteHotelBooking(travelAgentBooking.getHotelId());
             System.out.println("179 line");
 
+            hotelBookingService2.deleteHotelBooking2(travelAgentBooking.getHotel2Id());
 //            taxiBookingService.deleteTaxiBooking(travelAgentBooking.getTaxiId());
 
 
@@ -189,7 +212,6 @@ public class TravelAgentRestService {
             builder = Response.ok(travelAgentBooking);
 
         } catch (ConstraintViolationException ce) {
-            //Handle bean validation issues
             Map<String, String> responseObj = new HashMap<>();
 
             for (ConstraintViolation<?> violation : ce.getConstraintViolations()) {

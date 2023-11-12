@@ -4,9 +4,11 @@ import uk.ac.newcastle.enterprisemiddleware.booking.*;
 import uk.ac.newcastle.enterprisemiddleware.customer.Customer;
 import uk.ac.newcastle.enterprisemiddleware.flight.*;
 import uk.ac.newcastle.enterprisemiddleware.hotel.*;
+import uk.ac.newcastle.enterprisemiddleware.hotel2.HotelBooking2;
 import uk.ac.newcastle.enterprisemiddleware.taxi.TaxiBooking;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class TravelAgent implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -57,6 +59,28 @@ public class TravelAgent implements Serializable {
 //
 //    @NotNull
 //    private TaxiBooking taxiBooking;
+
+
+    public HotelBooking2 getHotelBooking2() {
+        return hotelBooking2;
+    }
+
+    public void setHotelBooking2(HotelBooking2 hotelBooking2) {
+        this.hotelBooking2 = hotelBooking2;
+    }
+
+    private HotelBooking2 hotelBooking2;
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    @NotNull
+    private Date bookingDate;
 
 
 

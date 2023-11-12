@@ -8,6 +8,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import static io.restassured.RestAssured.given;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import uk.ac.newcastle.enterprisemiddleware.booking.BookingRestService;
 import uk.ac.newcastle.enterprisemiddleware.contact.ContactService;
 import uk.ac.newcastle.enterprisemiddleware.customer.Customer;
+import uk.ac.newcastle.enterprisemiddleware.customer.CustomerRestService;
 import uk.ac.newcastle.enterprisemiddleware.customer.CustomerService;
 import uk.ac.newcastle.enterprisemiddleware.flight.Flight;
 import uk.ac.newcastle.enterprisemiddleware.flight.FlightService;
@@ -45,7 +47,7 @@ import javax.inject.Named;
     FlightService flightService;
 
     @BeforeAll
-    static void setup() {
+    static void setup() throws Exception {
 
 
         flight = new Flight();
@@ -60,9 +62,9 @@ import javax.inject.Named;
 
 
         booking = new Booking();
-        booking.setBookingDate(Calendar.getInstance().getTime());
-        booking.setFlightId(1L);
-        booking.setCustomerId(1L);
+        booking.setBookingDate(new Date());
+        booking.setFlightId(flight.getId());
+        booking.setCustomerId(customer.getId());
 
 
     }
@@ -72,6 +74,7 @@ import javax.inject.Named;
     @Test
     @Order(1)
     public void testCanCreateBooking() {
+
         given().
                 contentType(ContentType.JSON).
                 body(booking).
