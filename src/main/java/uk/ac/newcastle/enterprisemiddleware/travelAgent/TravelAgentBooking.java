@@ -92,18 +92,18 @@ public class TravelAgentBooking implements Serializable{
     @Column(name = "flightId")
     private Long flightId;
 
-    public Booking getBooking() {
-        return booking;
-    }
+//    public Booking getBooking() {
+//        return booking;
+//    }
+//
+//    public void setBooking(Booking booking) {
+//        this.booking = booking;
+//    }
 
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
-
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private Booking booking;
+//    @JsonIgnore
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn
+//    private Booking booking;
 
 
     public Date getBookingDate() {
