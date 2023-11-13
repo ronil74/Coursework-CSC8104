@@ -33,16 +33,16 @@ public class Taxi implements Serializable {
     private String registration;
 
 
-    public int getSeat() {
-        return seat;
+    public int getSeats() {
+        return seats;
     }
 
-    public void setSeat(int seat) {
-        this.seat = seat;
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 
     @NotNull
-    private int seat;
+    private int seats;
 
 
 

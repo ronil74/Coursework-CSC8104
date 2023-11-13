@@ -72,21 +72,21 @@ public class TravelAgentRestService {
         return Response.ok(travelAgentBookings).build();
     }
 
-    @GET
-    @Path("/{customerId:[0-9]+}")
-    @Operation(summary = "Fetch all TravelAgent", description = "Returns a JSON array of all stored TravelAgent objects.")
-    public Response retrieveAllBookingsByCId(
-            @Parameter(description = "Id of Customer to be fetched")
-            @Schema(minimum = "0", required = true)
-            @PathParam("customerId")
-            long customerId) {
-        Customer customer = customerService.findAllCustomersById(customerId);
-        if (customer == null) {
-            throw new RestServiceException("No Customer with the customerId " + customerId + " was found!", Response.Status.NOT_FOUND);
-        }
-        List<TravelAgentBooking> travelAgentBookings = travelAgentService.findByCustomer(customerId);
-        return Response.ok(travelAgentBookings).build();
-    }
+//    @GET
+//    @Path("/{customerId:[0-9]+}")
+//    @Operation(summary = "Fetch all TravelAgent", description = "Returns a JSON array of all stored TravelAgent objects.")
+//    public Response retrieveAllBookingsByCId(
+//            @Parameter(description = "Id of Customer to be fetched")
+//            @Schema(minimum = "0", required = true)
+//            @PathParam("customerId")
+//            long customerId) {
+//        Customer customer = customerService.findAllCustomersById(customerId);
+//        if (customer == null) {
+//            throw new RestServiceException("No Customer with the customerId " + customerId + " was found!", Response.Status.NOT_FOUND);
+//        }
+//        List<TravelAgentBooking> travelAgentBookings = travelAgentService.findByCustomer(customerId);
+//        return Response.ok(travelAgentBookings).build();
+//    }
 
     @POST
     @Operation(description = "Add a new TravelAgent to the database")
@@ -96,56 +96,43 @@ public class TravelAgentRestService {
             @APIResponse(responseCode = "409", description = "Agent supplied in request body conflicts with an existing Contact"),
             @APIResponse(responseCode = "500", description = "An unexpected error occurred whilst processing the request")
     })
-    @Transactional
     public Response createTravelAgent(
             @Parameter(description =
                     "JSON representation of TravelAgent object to be added to the database", required = true)
-            TravelAgent travelAgent) throws SystemException {
+            TravelAgent travelAgent) throws Exception {
 
         if (travelAgent == null) {
             throw new RestServiceException("Bad Request", Response.Status.BAD_REQUEST);
         }
-        if (travelAgent.getCustomer() == null) {
-            throw new RestServiceException("TravelAgent doesn't exsit", Response.Status.BAD_REQUEST);
-        }
+
         Response.ResponseBuilder builder;
-
-        try {
-
-            Customer customer =travelAgent.getCustomer() ;
-            System.out.println(customer.getEmail());
-            Customer newCustomer = customerService.findAllCustomersById(customer.getId());
-            System.out.println(customer.getEmail());
-            if (newCustomer == null) {
-                customer.setId(null);
-                newCustomer = customerService.create(customer);
-            }
+        try{
+            userTransaction.begin();
 
             TravelAgentBooking travelAgentBooking = new TravelAgentBooking();
 
             Booking booking=travelAgent.getFlight();
             booking.setId(null);
-            booking.setCustomerId(customer.getId());
             bookingService.create(booking);
+            System.out.println(booking);
             //Error Prone
 //            TaxiBooking taxiBooking= travelAgent.getTaxiBooking();
-//            taxiBooking.setCustomer(customer);
 //            taxiBooking.setTaxi(travelAgent.getTaxiBooking().getTaxi());
 
-//            taxiBookingService.createTaxiBooking(travelAgent.getTaxiBooking());
+            TaxiBooking taxiBooking;
+            taxiBooking= taxiBookingService.createTaxiBooking(travelAgent.getTaxiBooking());
 
-            HotelBooking2 hotelBooking2;
-            hotelBooking2=hotelBookingService2.createHotelBooking2(travelAgent.getHotelBooking2());
+//            HotelBooking2 hotelBooking2;
+//            hotelBooking2=hotelBookingService2.createHotelBooking2(travelAgent.getHotelBooking2());
 
 
+            System.out.println("128");
             HotelBooking hotelBooking;
-            System.out.println(hotelBookingService.getHotelBooking());
-          hotelBooking=hotelBookingService.createHotelBooking(travelAgent.getHotelBooking());
+            System.out.println(travelAgent.getHotelBooking());
+            hotelBooking=hotelBookingService.createHotelBooking(travelAgent.getHotelBooking());
 
 
             travelAgentBooking.setId(null);
-            travelAgentBooking.setCustomerId(travelAgent.getCustomer().getId());
-            System.out.println(travelAgent.getCustomer().getId());
             travelAgentBooking.setFlightId(booking.getId());
             System.out.println(travelAgent.getFlight().getFlightId());
             travelAgentBooking.setHotelId(hotelBooking.getId());
@@ -154,15 +141,15 @@ public class TravelAgentRestService {
             travelAgentBooking.setBookingDate(travelAgent.getBookingDate());
 
 
-//            travelAgentBooking.setTaxiId(taxiBooking.getTaxi().getId());
+            travelAgentBooking.setTaxiId(taxiBooking.getId());
 //            travelAgentBooking.setTaxiId(1L);
-            travelAgentBooking.setHotel2Id(hotelBooking2.getId());
+//            travelAgentBooking.setHotel2Id(hotelBooking2.getId());
 
             travelAgentBooking = travelAgentService.create(travelAgentBooking);
             builder = Response.status(Response.Status.CREATED).entity(travelAgentBooking);
-//            userTransaction.commit();
+            userTransaction.commit();
         } catch (Exception e) {
-//            userTransaction.rollback();
+            userTransaction.rollback();
             e.printStackTrace();
             System.out.println(e);
             throw new RestServiceException(e);
@@ -186,10 +173,6 @@ public class TravelAgentRestService {
             Long id) {
         TravelAgentBooking travelAgentBooking = travelAgentService.findById(id);
         System.out.println(travelAgentService.findById(id));
-        Customer customer = customerService.findAllCustomersById(travelAgentBooking.getCustomerId());
-        if (customer == null) {
-            throw new RestServiceException("TravelAgent not exist", Response.Status.BAD_REQUEST);
-        }
         Response.ResponseBuilder builder;
 
         try {
@@ -202,14 +185,14 @@ public class TravelAgentRestService {
             hotelBookingService.deleteHotelBooking(travelAgentBooking.getHotelId());
             System.out.println("179 line");
 
-            hotelBookingService2.deleteHotelBooking2(travelAgentBooking.getHotel2Id());
-//            taxiBookingService.deleteTaxiBooking(travelAgentBooking.getTaxiId());
+//            hotelBookingService2.deleteHotelBooking2(travelAgentBooking.getHotel2Id());
+            taxiBookingService.deleteTaxiBooking(travelAgentBooking.getTaxiId());
 
 
             travelAgentService.delete(travelAgentBooking);
 
 
-            builder = Response.ok(travelAgentBooking);
+            builder = Response.noContent();
 
         } catch (ConstraintViolationException ce) {
             Map<String, String> responseObj = new HashMap<>();

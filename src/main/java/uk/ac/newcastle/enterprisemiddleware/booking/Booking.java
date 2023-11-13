@@ -12,11 +12,21 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * <p>This is a the Domain object. The Booking class represents how booking resources are represented in the application
+ * database.</p>
+ *
+ * <p>The class also specifies how a contacts are retrieved from the database (with @NamedQueries), and acceptable values
+ * for Contact fields (with @NotNull, @Pattern etc...)<p/>
+ *
+ * @author Ronil
+ */
+
 @Entity
 @NamedQueries({
         @NamedQuery(name = Booking.FIND_ALL, query = "SELECT c FROM Booking c ORDER BY c.id ASC"),
         @NamedQuery(name = Booking.FIND_BY_ID, query = "SELECT c FROM Booking c WHERE c.id = :id")
-//        @NamedQuery(name = Booking.FIND_BY_DATE_AND_FLIGHT_ID, query = "SELECT c FROM Booking c WHERE c.flightId = :flightId AND c.bookingDate = :bookingDate"),
+//        @NamedQuery(name = Booking.FIND_BY_DATE_AND_FLIGHT_ID, query = "SELECT c FROM Booking c WHERE c.flightId = :flightId AND c.bookingDate = :bookingDate")
 //        @NamedQuery(name = Booking.FIND_BY_DATE_AND_FLIGHT_ID_AND_CUSTOMER_ID, query = "SELECT c FROM Booking c WHERE c.flightId = :flightId AND c.bookingDate = :bookingDate AND c.customerId=:customerID")
 
 })

@@ -12,6 +12,16 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * <p>This is a the Domain object. The Flight class represents how flight resources are represented in the application
+ * database.</p>
+ *
+ * <p>The class also specifies how a contacts are retrieved from the database (with @NamedQueries), and acceptable values
+ * for Contact fields (with @NotNull, @Pattern etc...)<p/>
+ *
+ * @author Ronil
+ */
+
 @Entity
 @NamedQueries({
         @NamedQuery(name = Flight.FIND_ALL, query = "SELECT c FROM Flight c ORDER BY c.flightNumber ASC"),

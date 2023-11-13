@@ -12,8 +12,8 @@ import java.util.Objects;
 
 
 @Entity
-@NamedQueries({@NamedQuery(name = TravelAgentBooking.FIND_ALL, query = "SELECT c FROM TravelAgentBooking c ORDER BY c.customerId"),
-        @NamedQuery(name = TravelAgentBooking.FIND_BY_CUSTOMER, query = "SELECT c FROM TravelAgentBooking c WHERE c.customerId = :customerId"),
+@NamedQueries({
+        @NamedQuery(name = TravelAgentBooking.FIND_ALL, query = "SELECT c FROM TravelAgentBooking c ORDER BY c.id"),
         @NamedQuery(name = TravelAgentBooking.Find_BY_ID, query = "SELECT c FROM TravelAgentBooking c WHERE c.id = :id")
 })
 @XmlRootElement
@@ -22,7 +22,6 @@ public class TravelAgentBooking implements Serializable{
 
     private static final long serialVersionUID = 1L;
     public static final String FIND_ALL = "TravelAgentBooking.findAll";
-    public static final String FIND_BY_CUSTOMER = "TravelAgentBooking.findByCustomer";
 
     public static final String Find_BY_ID="TravelAgentBooking.findById";
 
@@ -38,16 +37,16 @@ public class TravelAgentBooking implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
-    @Column(name = "customerId")
-    private Long customerId;
+//    public Long getCustomerId() {
+//        return customerId;
+//    }
+//
+//    public void setCustomerId(Long customerId) {
+//        this.customerId = customerId;
+//    }
+//
+//    @Column(name = "customerId")
+//    private Long customerId;
 
     public int getHotelId() {
         return hotelId;
@@ -60,27 +59,27 @@ public class TravelAgentBooking implements Serializable{
     @Column(name = "hotelId")
     private int hotelId;
 
-//    public Long getTaxiId() {
-//        return taxiId;
-//    }
-//
-//    public void setTaxiId(Long taxiId) {
-//        this.taxiId = taxiId;
-//    }
-//
-//    @Column(name = "taxiId")
-//    private Long taxiId;
-
-
-    public int getHotel2Id() {
-        return hotel2Id;
+    public int getTaxiId() {
+        return taxiId;
     }
 
-    public void setHotel2Id(int hotel2Id) {
-        this.hotel2Id = hotel2Id;
+    public void setTaxiId(int taxiId) {
+        this.taxiId = taxiId;
     }
 
-    private int hotel2Id;
+    @Column(name = "taxiId")
+    private int taxiId;
+
+
+//    public int getHotel2Id() {
+//        return hotel2Id;
+//    }
+//
+//    public void setHotel2Id(int hotel2Id) {
+//        this.hotel2Id = hotel2Id;
+//    }
+//
+//    private int hotel2Id;
 
     public Long getFlightId() {
         return flightId;

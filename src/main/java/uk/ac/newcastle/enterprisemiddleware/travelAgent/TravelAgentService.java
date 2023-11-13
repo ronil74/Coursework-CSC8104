@@ -25,9 +25,9 @@ public class TravelAgentService {
         return travelAgentRepository.findById(id);
     }
 
-    public List<TravelAgentBooking> findByCustomer(Long customerId) {
-        return travelAgentRepository.findByCustomer(customerId);
-    }
+//    public List<TravelAgentBooking> findByCustomer(Long customerId) {
+//        return travelAgentRepository.findByCustomer(customerId);
+//    }
 
     public TravelAgentBooking create(TravelAgentBooking booking) throws Exception {
         return travelAgentRepository.create(booking);

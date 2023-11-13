@@ -25,10 +25,6 @@ public class TravelAgentRepository {
     EntityManager em;
 
 
-    List<TravelAgentBooking> findByCustomer(Long customerId) {
-        TypedQuery<TravelAgentBooking> query = em.createNamedQuery(TravelAgentBooking.FIND_BY_CUSTOMER, TravelAgentBooking.class).setParameter("customerId", customerId);
-        return query.getResultList();
-    }
 
     List<TravelAgentBooking> findAll() {
         TypedQuery<TravelAgentBooking> query = em.createNamedQuery(TravelAgentBooking.FIND_ALL, TravelAgentBooking.class);

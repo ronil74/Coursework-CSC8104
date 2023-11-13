@@ -6,7 +6,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Path("/bookings")
+@Path("hotel/bookings")
 @RegisterRestClient(configKey = "hotel-api")
 public interface HotelBookingService {
 

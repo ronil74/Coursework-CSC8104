@@ -7,7 +7,7 @@ import uk.ac.newcastle.enterprisemiddleware.hotel.HotelBooking;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Path("/taxi")
+@Path("/taxis")
 @RegisterRestClient(configKey = "taxi-api")
 public interface TaxiService {
 

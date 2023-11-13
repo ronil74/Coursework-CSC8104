@@ -13,16 +13,16 @@ import java.util.Date;
 public class TravelAgent implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    @NotNull
-    private Customer customer;
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
+//
+//    @NotNull
+//    private Customer customer;
 
 
     public Booking getFlight() {
@@ -49,27 +49,27 @@ public class TravelAgent implements Serializable {
     private HotelBooking hotelBooking;
 
 
-//    public TaxiBooking getTaxiBooking() {
-//        return taxiBooking;
-//    }
-//
-//    public void setTaxiBooking(TaxiBooking taxiBooking) {
-//        this.taxiBooking = taxiBooking;
-//    }
-//
-//    @NotNull
-//    private TaxiBooking taxiBooking;
-
-
-    public HotelBooking2 getHotelBooking2() {
-        return hotelBooking2;
+    public TaxiBooking getTaxiBooking() {
+        return taxiBooking;
     }
 
-    public void setHotelBooking2(HotelBooking2 hotelBooking2) {
-        this.hotelBooking2 = hotelBooking2;
+    public void setTaxiBooking(TaxiBooking taxiBooking) {
+        this.taxiBooking = taxiBooking;
     }
 
-    private HotelBooking2 hotelBooking2;
+    @NotNull
+    private TaxiBooking taxiBooking;
+
+
+//    public HotelBooking2 getHotelBooking2() {
+//        return hotelBooking2;
+//    }
+//
+//    public void setHotelBooking2(HotelBooking2 hotelBooking2) {
+//        this.hotelBooking2 = hotelBooking2;
+//    }
+//
+//    private HotelBooking2 hotelBooking2;
 
     public Date getBookingDate() {
         return bookingDate;

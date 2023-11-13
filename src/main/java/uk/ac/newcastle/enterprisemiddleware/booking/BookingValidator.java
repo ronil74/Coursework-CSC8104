@@ -29,25 +29,25 @@ public class BookingValidator {
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(new HashSet<ConstraintViolation<?>>(violations));
         }
-//        if (BookingExists(booking.getBookingDate(), booking.getFlight().getId(), booking.getCustomer().getId())){
+//        if (BookingExists(booking.getBookingDate(), booking.getFlight().getId())){
 //            throw new UniqueBookingException("Unique Booking Violation");
 //        }
 
     }
 
-//   boolean BookingExists(Date date, Long flightId,Long customerId){
+//   boolean BookingExists(Date date, Long flightId){
 //        Booking booking = null;
 //        Booking bookingWithID = null;
 //        try {
-//            booking = crud.findByDateAndFlightIdAndCustomerId(booking.getFlight().getId(),booking.getBookingDate(), booking.getCustomer().getId());
+//            booking = crud.findByDateAndFlightId(flightId,date);
 //        } catch (NoResultException e) {
 //            // ignore
 //        }
 //
-//        if (flightId != null && date != null && customerId !=null) {
+//        if (flightId != null && date != null ) {
 //            try {
-//                bookingWithID = crud.findByDateAndFlightIdAndCustomerId(flightId, date,customerId);
-//                if (bookingWithID != null && bookingWithID.getFlightId().equals(flightId) && bookingWithID.getBookingDate().equals(date) && bookingWithID.getCustomerId().equals(customerId)) {
+//                bookingWithID = crud.findByDateAndFlightId(flightId, date);
+//                if (bookingWithID != null && bookingWithID.getFlight().getId().equals(flightId) && bookingWithID.getBookingDate().equals(date)) {
 //                    booking = null;
 //                }
 //            } catch (NoResultException e) {

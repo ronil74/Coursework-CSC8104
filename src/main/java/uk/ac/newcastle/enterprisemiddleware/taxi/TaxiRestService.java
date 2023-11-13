@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/taxi")
+@Path("/taxis")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TaxiRestService {
@@ -22,7 +22,7 @@ public class TaxiRestService {
     TaxiService taxiService;
 
     @GET
-    @Path("/taxi")
+    @Path("/taxis")
     @Operation(summary = "Fetch all hotels", description = "Returns a JSON array of all stored flight objects.")
     public Response findAllTaxi() {
         List<Taxi> taxi;

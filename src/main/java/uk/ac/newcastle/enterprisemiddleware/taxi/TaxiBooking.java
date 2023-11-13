@@ -10,55 +10,39 @@ import java.util.Objects;
 public class TaxiBooking implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    private Long id;
+    private int id;
 
 
-//    public Long getTaxiId() {
-//        return taxiId;
-//    }
-//
-//    public void setTaxiId(Long taxiId) {
-//        this.taxiId = taxiId;
-//    }
-//
-//
-//    private Long taxiId;
-
-    public Taxi getTaxi() {
-        return taxi;
+    public int getTaxiId() {
+        return taxiId;
     }
 
-    public void setTaxi(Taxi taxi) {
-        this.taxi = taxi;
+    public void setTaxiId(int taxiId) {
+        this.taxiId = taxiId;
     }
 
-    private Taxi taxi;
 
-    public Customer getCustomer() {
-        return customer;
+    private int taxiId;
+
+
+
+
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
-
-    private Customer customer;
-
-//    public Long getCustomerId() {
-//        return customerId;
-//    }
-//
-//    public void setCustomerId(Long customerId) {
-//        this.customerId = customerId;
-//    }
+    private int customerId;
 //
 ////    @Override
 ////    public String toString() {

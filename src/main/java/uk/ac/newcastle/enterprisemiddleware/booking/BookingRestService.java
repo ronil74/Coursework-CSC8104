@@ -6,6 +6,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.jboss.resteasy.reactive.Cache;
 import uk.ac.newcastle.enterprisemiddleware.area.InvalidAreaCodeException;
+import uk.ac.newcastle.enterprisemiddleware.contact.UniqueEmailException;
 import uk.ac.newcastle.enterprisemiddleware.customer.*;
 import uk.ac.newcastle.enterprisemiddleware.customer.CustomerService;
 import uk.ac.newcastle.enterprisemiddleware.flight.*;
@@ -111,7 +112,8 @@ public class BookingRestService {
         Booking.setCustomer(customer);
         try {
             service.create(Booking);
-        } catch (ConstraintViolationException ce) {
+        }
+        catch (ConstraintViolationException ce) {
             //Handle bean validation issues
             Map<String, String> responseObj = new HashMap<>();
 

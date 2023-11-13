@@ -25,7 +25,7 @@ public class HotelRestService {
 
     @GET
     @Path("/hotels")
-    @Operation(summary = "Fetch all hotels", description = "Returns a JSON array of all stored flight objects.")
+    @Operation(summary = "Fetch all hotels", description = "Returns a JSON array of all stored hotels objects.")
     public Response findAllHotels() {
         List<Hotel> hotel;
         hotel = hotelService.hotel();

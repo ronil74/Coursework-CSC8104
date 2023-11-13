@@ -35,6 +35,12 @@ public class CustomerRepository {
 //        return resultList.isEmpty() ? null: resultList.get(0);
 //    }
 //
+    /**
+     * <p>Returns a single Customer object, specified by a Long id.<p/>
+     *
+     * @param id The id field of the Customer to be returned
+     * @return The Customer with the specified id
+     */
      Customer findAllCustomersById(Long id) {
         return em.find(Customer.class, id);
     }
