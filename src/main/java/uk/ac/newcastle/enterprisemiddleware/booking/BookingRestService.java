@@ -6,7 +6,6 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.jboss.resteasy.reactive.Cache;
 import uk.ac.newcastle.enterprisemiddleware.area.InvalidAreaCodeException;
-import uk.ac.newcastle.enterprisemiddleware.contact.UniqueEmailException;
 import uk.ac.newcastle.enterprisemiddleware.customer.*;
 import uk.ac.newcastle.enterprisemiddleware.customer.CustomerService;
 import uk.ac.newcastle.enterprisemiddleware.flight.*;
@@ -122,7 +121,12 @@ public class BookingRestService {
             }
             throw new RestServiceException("Bad Request", responseObj, Response.Status.BAD_REQUEST, ce);
 
-        } catch (Exception e) {
+        } catch (UniqueBookingException e) {
+            // Handle the unique constraint violation
+            Map<String, String> responseObj = new HashMap<>();
+            responseObj.put("flightId", "That flight is already used, please use a different flight and booking date");
+            throw new RestServiceException("Bad Request", responseObj, Response.Status.CONFLICT, e);
+        }catch (Exception e) {
             log.severe(" create booking " +
                     "[" + Booking + "] error");
             e.printStackTrace();

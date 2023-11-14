@@ -36,9 +36,9 @@ public class BookingService {
         return crud.findById(id);
     }
 
-//     public Booking findByDateAndFlightId(Long flightId, Date date) {
-//        return crud.findByDateAndFlightId(flightId, date);
-//    }
+     public Booking findByDateAndFlightId(Long flightId, Date date) {
+        return crud.findByDateAndFlightId(flightId, date);
+    }
 
 //    public Booking findByDateAndFlightIdAndCustomerId(Long flightId, Date date,Long customerId){
 //        return findByDateAndFlightIdAndCustomerId(flightId,date,customerId);
