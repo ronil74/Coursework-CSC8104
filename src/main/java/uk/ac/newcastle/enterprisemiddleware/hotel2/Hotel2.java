@@ -2,6 +2,11 @@ package uk.ac.newcastle.enterprisemiddleware.hotel2;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+/**
+ * <p>Simple POJO representing AreaCode objects</p>
+ *
+ * @author Ronil
+ */
 
 public class Hotel2 implements Serializable {
     private static final long serialVersionUID = 1L;

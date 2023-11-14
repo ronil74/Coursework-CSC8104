@@ -6,10 +6,20 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+/**
+ * <p>Simple POJO representing TaxiBooking objects</p>
+ *
+ * @author Ronil
+ */
 
 public class TaxiBooking implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private int id;
+    private int taxiId;
+    private int customerId;
+    private Date bookingDate;
+
     public int getId() {
         return id;
     }
@@ -17,9 +27,6 @@ public class TaxiBooking implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
-    private int id;
-
 
     public int getTaxiId() {
         return taxiId;
@@ -29,20 +36,9 @@ public class TaxiBooking implements Serializable {
         this.taxiId = taxiId;
     }
 
-
-    private int taxiId;
-
-
-
-
     public int getCustomerId() {
         return customerId;
     }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-    private int customerId;
 //
 ////    @Override
 ////    public String toString() {
@@ -56,6 +52,10 @@ public class TaxiBooking implements Serializable {
 //
 //    private Long customerId;
 
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
     public Date getBookingDate() {
         return bookingDate;
     }
@@ -63,8 +63,6 @@ public class TaxiBooking implements Serializable {
     public void setBookingDate(Date bookingDate) {
         this.bookingDate = bookingDate;
     }
-
-    private Date bookingDate;
 
 
 }

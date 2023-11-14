@@ -2,21 +2,18 @@ package uk.ac.newcastle.enterprisemiddleware.hotel2;
 
 import java.io.Serializable;
 import java.util.Date;
+/**
+ * <p>Simple POJO representing HotelBooking objects</p>
+ *
+ * @author Ronil
+ */
 
 public class HotelBooking2 implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     private int id;
+    private int hotelId;
+    private int customerId;
 
 //    public String getHotelName() {
 //        return hotelName;
@@ -27,6 +24,15 @@ public class HotelBooking2 implements Serializable {
 //    }
 //
 //    private String hotelName;
+    private Date bookingDate;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getHotelId() {
         return hotelId;
@@ -36,8 +42,6 @@ public class HotelBooking2 implements Serializable {
         this.hotelId = hotelId;
     }
 
-    private int hotelId;
-
     public int getCustomerId() {
         return customerId;
     }
@@ -46,10 +50,6 @@ public class HotelBooking2 implements Serializable {
         this.customerId = customerId;
     }
 
-
-
-    private int customerId;
-
     public Date getBookingDate() {
         return bookingDate;
     }
@@ -57,7 +57,5 @@ public class HotelBooking2 implements Serializable {
     public void setBookingDate(Date bookingDate) {
         this.bookingDate = bookingDate;
     }
-
-    private Date bookingDate;
 
 }

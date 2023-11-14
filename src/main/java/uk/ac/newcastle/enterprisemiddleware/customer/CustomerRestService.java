@@ -34,6 +34,13 @@ public class CustomerRestService {
     CustomerService service;
 
 
+    /**
+     * <p>Return all the Customer.</p>
+     *
+     * <p>The url may optionally include query parameters specifying a Customer name</p>
+     *
+     * @return A Response containing a list of Customer
+     */
     @GET
     @Operation(summary = "Fetch all Customers", description = "Returns a JSON array of all stored Customer objects.")
     public Response retrieveAllCustomers() {
@@ -58,6 +65,12 @@ public class CustomerRestService {
 //    }
 
 
+    /**
+     * <p>Search for and return a Customer identified by id.</p>
+     *
+     * @param id The long parameter value provided as a Customer's id
+     * @return A Response containing a single Customer
+     */
     @GET
     @Path("/{id:[0-9]+}")
     @Operation(summary="Fetch all Customers by ID",description = "Returns a JSON array of all stored Customer objects.")
@@ -76,6 +89,12 @@ public class CustomerRestService {
         return Response.ok(customer).build();
     }
 
+    /**
+     * <p>Search for and return a Customer identified by email.</p>
+     *
+     * @param email The long parameter value provided as a Customer's email
+     * @return A Response containing a single Customer
+     */
     @GET
     @Path("/email/{email}")
     @Operation(summary="Fetch all Customers by email",description = "Returns a JSON array of all stored Customer objects.")
@@ -91,6 +110,14 @@ public class CustomerRestService {
         return Response.ok(customers).build();
     }
 
+    /**
+     * <p>Creates a new customer from the values provided. Performs validation and will return a JAX-RS response with
+     * either 201 (Resource created) or with a map of fields, and related errors.</p>
+     *
+     * @param Customer The Customer object, constructed automatically from JSON input, to be <i>created</i> via
+     * {@link CustomerService#create(Customer)}
+     * @return A Response indicating the outcome of the create operation
+     */
     @POST
     @Operation(description = "Add a new Customer to the database")
     @APIResponses(value = {
@@ -145,6 +172,14 @@ public class CustomerRestService {
     }
 
 
+    /**
+     * <p>Deletes a customer using the ID provided. If the ID is not present then nothing can be deleted.</p>
+     *
+     * <p>Will return a JAX-RS response with either 204 NO CONTENT or with a map of fields, and related errors.</p>
+     *
+     * @param id The Long parameter value provided as the id of the Customer to be deleted
+     * @return A Response indicating the outcome of the delete operation
+     */
     @DELETE
     @Path("/{id:[0-9]+}")
     @Operation(description = "Delete a Contact from the database")

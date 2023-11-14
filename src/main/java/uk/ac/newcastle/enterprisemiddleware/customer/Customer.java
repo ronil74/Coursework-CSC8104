@@ -16,8 +16,8 @@ import java.util.Objects;
  * <p>This is a the Domain object. The Customer class represents how customer resources are represented in the application
  * database.</p>
  *
- * <p>The class also specifies how a contacts are retrieved from the database (with @NamedQueries), and acceptable values
- * for Contact fields (with @NotNull, @Pattern etc...)<p/>
+ * <p>The class also specifies how a Customer are retrieved from the database (with @NamedQueries), and acceptable values
+ * for Customer fields (with @NotNull, @Pattern etc...)<p/>
  *
  * @author Ronil
  */

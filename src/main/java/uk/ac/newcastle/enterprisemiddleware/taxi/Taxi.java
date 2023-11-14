@@ -1,11 +1,14 @@
 package uk.ac.newcastle.enterprisemiddleware.taxi;
 
-import uk.ac.newcastle.enterprisemiddleware.booking.*;
-import uk.ac.newcastle.enterprisemiddleware.customer.Customer;
 
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+/**
+ * <p>Simple POJO representing AreaCode objects</p>
+ *
+ * @author Ronil
+ */
 public class Taxi implements Serializable {
     private static final long serialVersionUID = 1L;
 

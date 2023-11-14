@@ -45,6 +45,12 @@ public class FlightRestService {
 
 
 
+    /**
+     * <p>Search for and return a Flight identified by id.</p>
+     *
+     * @param id The long parameter value provided as a Flight's id
+     * @return A Response containing a single Flight
+     */
     @GET
     @Path("/findFlightById/{id:[0-9]+}")
     @Operation(
@@ -71,6 +77,14 @@ public class FlightRestService {
     }
 
 
+    /**
+     * <p>Creates a new Flight from the values provided. Performs validation and will return a JAX-RS response with
+     * either 201 (Resource created) or with a map of fields, and related errors.</p>
+     *
+     * @param flight The Flight object, constructed automatically from JSON input, to be <i>created</i> via
+     * {@link FlightService#create(Flight)}
+     * @return A Response indicating the outcome of the create operation
+     */
     @POST
     @Path("/createFlight")
     @Operation(
@@ -124,6 +138,14 @@ public class FlightRestService {
 
     }
 
+    /**
+     * <p>Deletes a Flight using the ID provided. If the ID is not present then nothing can be deleted.</p>
+     *
+     * <p>Will return a JAX-RS response with either 204 NO CONTENT or with a map of fields, and related errors.</p>
+     *
+     * @param id The Long parameter value provided as the id of the Flight to be deleted
+     * @return A Response indicating the outcome of the delete operation
+     */
     @DELETE
     @Path("/deleteFlight/{id:[0-9]+}")
     @Operation(description = "Delete a Flight object from the database")

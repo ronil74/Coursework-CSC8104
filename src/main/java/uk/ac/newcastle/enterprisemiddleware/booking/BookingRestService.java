@@ -44,6 +44,10 @@ public class BookingRestService {
     FlightService flightService;
 
 
+    /**
+     * <p>Return all the Booking</p>
+     * @return A Response containing a list of Booking
+     */
     @GET
     @Path("/findAllBooking")
     @Operation(summary = "Fetch all Booking", description = "Returns a JSON array of all stored Booking objects.")
@@ -53,6 +57,34 @@ public class BookingRestService {
         return Response.ok(booking).build();
     }
 
+//    @GET
+//    @Path("/findByCustomerId/{customerId:[0-9]+}")
+//    @Operation(summary ="fetch booking by customer id")
+//    @APIResponses(value = {
+//            @APIResponse(responseCode = "200", description = "Booking found"),
+//            @APIResponse(responseCode = "404", description = "Booking with id not found")
+//    })
+//    public Response findByCustomerId(@Parameter(description = "Id of Booking to be fetched")
+//                                         @Schema(minimum = "0", required = true)
+//                                         @PathParam("customerId")
+//                                         long customerId){
+//       List<Booking> booking = service.findByCustomerId(customerId);
+//        if (booking == null) {
+//            // Verify that the contact exists. Return 404, if not present.
+//            throw new RestServiceException("No Booking with the customer id " + customerId + " was found!", Response.Status.NOT_FOUND);
+//        }
+//        log.info("findByCustomerId " + customerId + ": found Booking = " + booking);
+//
+//        return Response.ok(booking).build();
+//
+//    }
+
+    /**
+     * <p>Search for and return a Booking identified by id.</p>
+     *
+     * @param id The long parameter value provided as a Booking id
+     * @return A Response containing a single Booking
+     */
     @GET
     @Path("/findFlightByBookingId/{id:[0-9]+}")
     @Operation(
@@ -79,6 +111,14 @@ public class BookingRestService {
     }
 
 
+    /**
+     * <p>Creates a new booking from the values provided. Performs validation and will return a JAX-RS response with
+     * either 201 (Resource created) or with a map of fields, and related errors.</p>
+     *
+     * @param Booking The Booking object, constructed automatically from JSON input, to be <i>created</i> via
+     * {@link BookingService#create(Booking)}
+     * @return A Response indicating the outcome of the create operation
+     */
     @POST
     @Path("/createBooking")
     @Operation(
@@ -112,6 +152,12 @@ public class BookingRestService {
         try {
             service.create(Booking);
         }
+          catch (UniqueBookingException e) {
+            // Handle the unique constraint violation
+            Map<String, String> responseObj = new HashMap<>();
+            responseObj.put("flightId", "That flight is already used, please use a different flight and booking date");
+            throw new RestServiceException("Bad Request", responseObj, Response.Status.CONFLICT, e);
+        }
         catch (ConstraintViolationException ce) {
             //Handle bean validation issues
             Map<String, String> responseObj = new HashMap<>();
@@ -121,11 +167,6 @@ public class BookingRestService {
             }
             throw new RestServiceException("Bad Request", responseObj, Response.Status.BAD_REQUEST, ce);
 
-        } catch (UniqueBookingException e) {
-            // Handle the unique constraint violation
-            Map<String, String> responseObj = new HashMap<>();
-            responseObj.put("flightId", "That flight is already used, please use a different flight and booking date");
-            throw new RestServiceException("Bad Request", responseObj, Response.Status.CONFLICT, e);
         }catch (Exception e) {
             log.severe(" create booking " +
                     "[" + Booking + "] error");
@@ -136,6 +177,14 @@ public class BookingRestService {
     }
 
 
+    /**
+     * <p>Deletes a booking using the ID provided. If the ID is not present then nothing can be deleted.</p>
+     *
+     * <p>Will return a JAX-RS response with either 204 NO CONTENT or with a map of fields, and related errors.</p>
+     *
+     * @param id The Long parameter value provided as the id of the Booking to be deleted
+     * @return A Response indicating the outcome of the delete operation
+     */
 
     @DELETE
     @Path("/deleteBooking/{id:[0-9]+}")

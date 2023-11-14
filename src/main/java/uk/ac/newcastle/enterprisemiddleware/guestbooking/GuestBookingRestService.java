@@ -34,6 +34,10 @@ public class GuestBookingRestService {
     UserTransaction userTransaction;
 
 
+    /**
+     * @param guestBooking The GuestBooking object, constructed automatically from JSON input
+     * @return A Response indicating the outcome of the create operation
+     */
     @POST
     @Operation(summary = "Addition of new booking")
     @APIResponses(value = {

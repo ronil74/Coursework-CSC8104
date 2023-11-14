@@ -39,6 +39,13 @@ public class CustomerService {
         return crud.findAllCustomersByEmail(email);
     }
 
+    /**
+     *
+     * <p>Validates the data in the provided Contact object using a {@link CustomerValidator} object.<p/>
+     *
+     * @param customer The Customer object to be written to the database using a {@link CustomerRepository} object
+     * @return The Customer object that has been successfully written to the application database
+     */
 
     public Customer create(Customer customer) throws Exception {
         validator.validateCustomer(customer);
@@ -55,6 +62,13 @@ public class CustomerService {
     }
 
 
+    /**
+     * <p>Deletes the provided Customer object from the application database if found there.<p/>
+     *
+     * @param customer The Customer object to be removed from the application database
+     * @return The Customer object that has been successfully removed from the application database; or null
+     * @throws Exception
+     */
     public Customer delete(Customer customer) {
         return crud.deleteCustomer(customer);
     }

@@ -24,18 +24,38 @@ public class FlightService {
     @Inject
     FlightRepository crud;
 
+    /**
+     * <p>Returns a List of all persisted {@link Flight} objects.<p/>
+     *
+     * @return List of Flight objects
+     */
     public List<Flight> findAllFlights() {
         return crud.findAllFlights();
     }
 
-    public Flight findFlightById(long flight){
-        return crud.findById(flight);
+    /**
+     * <p>Returns a List of all persisted {@link Flight} objects.<p/>
+     *
+     * @param  id
+     * @return List of Flight objects
+     */
+    public Flight findFlightById(long id){
+        return crud.findById(id);
     }
 
     public Flight findByFlightNumber(String flightNumber) {
         return crud.findByFlightNumber(flightNumber);
     }
 
+    /**
+     * <p>Writes the provided Flight object to the application database.<p/>
+     *
+     * <p>Validates the data in the provided Flight object using a {@link FlightValidator} object.<p/>
+     *
+     * @param flight The Flight object to be written to the database using a {@link FlightRepository} object
+     * @return The flight object that has been successfully written to the application database
+     * @throws ConstraintViolationException, ValidationException, Exception
+     */
     public Flight create(Flight flight) throws Exception{
         validator.validateFlight(flight);
         try {
@@ -52,6 +72,13 @@ public class FlightService {
         return crud.create(flight);
 
     }
+    /**
+     * <p>Deletes the provided Flight object from the application database if found there.<p/>
+     *
+     * @param flight The Flight object to be removed from the application database
+     * @return The Flight object that has been successfully removed from the application database; or null
+     * @throws Exception
+     */
     public Flight delete(Flight flight) {
         log.info("delete() - Deleting " + flight.toString());
 

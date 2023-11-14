@@ -72,21 +72,6 @@ public class TravelAgentRestService {
         return Response.ok(travelAgentBookings).build();
     }
 
-//    @GET
-//    @Path("/{customerId:[0-9]+}")
-//    @Operation(summary = "Fetch all TravelAgent", description = "Returns a JSON array of all stored TravelAgent objects.")
-//    public Response retrieveAllBookingsByCId(
-//            @Parameter(description = "Id of Customer to be fetched")
-//            @Schema(minimum = "0", required = true)
-//            @PathParam("customerId")
-//            long customerId) {
-//        Customer customer = customerService.findAllCustomersById(customerId);
-//        if (customer == null) {
-//            throw new RestServiceException("No Customer with the customerId " + customerId + " was found!", Response.Status.NOT_FOUND);
-//        }
-//        List<TravelAgentBooking> travelAgentBookings = travelAgentService.findByCustomer(customerId);
-//        return Response.ok(travelAgentBookings).build();
-//    }
 
     @POST
     @Operation(description = "Add a new TravelAgent to the database")
