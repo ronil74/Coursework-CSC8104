@@ -28,7 +28,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @QuarkusTest
-@TestHTTPEndpoint(BookingRestService.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @QuarkusTestResource(H2DatabaseTestResource.class)
 
@@ -37,14 +36,6 @@ import javax.inject.Named;
     private static Flight flight;
     private  static Customer customer;
 
-    @Inject
-    @Named("logger")
-    Logger log;
-    @Inject
-    CustomerService customerService;
-
-    @Inject
-    FlightService flightService;
 
     @BeforeAll
     static void setup() throws Exception {
@@ -61,34 +52,73 @@ import javax.inject.Named;
         customer.setPhoneNumber("09890448159");
 
 
+        Date date=new Date(2023,12,12);
         booking = new Booking();
-        booking.setBookingDate(new Date());
-        booking.setFlightId(flight.getId());
-        booking.setCustomerId(customer.getId());
+        booking.setBookingDate(date);
+
+
 
 
     }
-
-
-
     @Test
     @Order(1)
-    public void testCanCreateBooking() {
-
-        given().
+    public void testCanCreateCustomer() {
+        System.out.println(customer.toString());
+     Response rep=   given().
                 contentType(ContentType.JSON).
-                body(booking).
+                body(customer).
                 when()
-                .post("/createBooking").
+                .post("/customer").
                 then().
-                statusCode(201);
+                statusCode(201)
+                .extract().response();
+        Long id=rep.jsonPath().getLong("id");
+        customer.setId(id);
+        booking.setCustomerId(customer.getId());
     }
 
     @Test
     @Order(2)
+    public void testCanCreateFlight() {
+     Response rep=   given().
+                contentType(ContentType.JSON).
+                body(flight).
+                when()
+                .post("/flight/createFlight").
+                then().
+                statusCode(201)
+             .extract().response();
+
+        Long flightId=rep.jsonPath().getLong("id");
+        flight.setId(flightId);
+        booking.setFlightId(flight.getId());
+    }
+
+
+
+    @Test
+    @Order(3)
+    public void testCanCreateBooking() {
+
+      Response rep=  given().
+                contentType(ContentType.JSON).
+                body(booking).
+                when()
+                .post("/flightbooking/createBooking").
+                then().
+                statusCode(201)
+              .extract().response();
+        Long id=rep.jsonPath().getLong("id");
+        booking.setCustomer(customer);
+        booking.setFlight(flight);
+        booking.setId(id);
+    }
+
+    @Test
+    @Order(4)
     public void testCanGetBooking() {
         Response response = when().
-                get("/findAllBooking").
+                get("/flightbooking/findAllBooking").
                 then().
                 statusCode(200).
                 extract().response();
@@ -104,10 +134,11 @@ import javax.inject.Named;
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     public void testCanDeleteBooking() {
+        System.out.println(booking);
         Response response = when().
-                get().
+                get("/flightbooking/findAllBooking").
                 then().
                 statusCode(200).
                 extract().response();
@@ -115,7 +146,7 @@ import javax.inject.Named;
         Booking[] result = response.body().as(Booking[].class);
 
         when().
-                delete("/deleteBooking/{id:[0-9]+}",result[0].getId().toString()).
+                delete("flightbooking/deleteBooking/"+result[0].getId().toString()).
                 then().
                 statusCode(204);
     }

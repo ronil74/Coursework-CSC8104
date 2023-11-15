@@ -1,10 +1,10 @@
 package uk.ac.newcastle.enterprisemiddleware.travelAgent;
+
 import io.smallrye.common.constraint.NotNull;
 import uk.ac.newcastle.enterprisemiddleware.booking.*;
 import uk.ac.newcastle.enterprisemiddleware.customer.Customer;
 import uk.ac.newcastle.enterprisemiddleware.flight.*;
 import uk.ac.newcastle.enterprisemiddleware.hotel.*;
-import uk.ac.newcastle.enterprisemiddleware.hotel2.HotelBooking2;
 import uk.ac.newcastle.enterprisemiddleware.taxi.TaxiBooking;
 
 import java.io.Serializable;
@@ -23,7 +23,14 @@ public class TravelAgent implements Serializable {
 //
 //    @NotNull
 //    private Customer customer;
-
+    @NotNull
+    private Booking flight;
+    @NotNull
+    private HotelBooking hotelBooking;
+    @NotNull
+    private TaxiBooking taxiBooking;
+    @NotNull
+    private Date bookingDate;
 
     public Booking getFlight() {
         return flight;
@@ -33,10 +40,6 @@ public class TravelAgent implements Serializable {
         this.flight = flight;
     }
 
-    @NotNull
-    private Booking flight;
-
-
     public HotelBooking getHotelBooking() {
         return hotelBooking;
     }
@@ -45,20 +48,9 @@ public class TravelAgent implements Serializable {
         this.hotelBooking = hotelBooking;
     }
 
-    @NotNull
-    private HotelBooking hotelBooking;
-
-
     public TaxiBooking getTaxiBooking() {
         return taxiBooking;
     }
-
-    public void setTaxiBooking(TaxiBooking taxiBooking) {
-        this.taxiBooking = taxiBooking;
-    }
-
-    @NotNull
-    private TaxiBooking taxiBooking;
 
 
 //    public HotelBooking2 getHotelBooking2() {
@@ -71,6 +63,10 @@ public class TravelAgent implements Serializable {
 //
 //    private HotelBooking2 hotelBooking2;
 
+    public void setTaxiBooking(TaxiBooking taxiBooking) {
+        this.taxiBooking = taxiBooking;
+    }
+
     public Date getBookingDate() {
         return bookingDate;
     }
@@ -78,11 +74,6 @@ public class TravelAgent implements Serializable {
     public void setBookingDate(Date bookingDate) {
         this.bookingDate = bookingDate;
     }
-
-    @NotNull
-    private Date bookingDate;
-
-
 
 
 }

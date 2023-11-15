@@ -16,6 +16,7 @@ import uk.ac.newcastle.enterprisemiddleware.customer.*;
 import uk.ac.newcastle.enterprisemiddleware.booking.*;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
@@ -24,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @QuarkusTest
-@TestHTTPEndpoint(GuestBookingRestService.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @QuarkusTestResource(H2DatabaseTestResource.class)
 
@@ -49,6 +49,7 @@ public class GuestBookingServiceIntegrationTest {
         customer.setPhoneNumber("09890448159");
 
         booking = new Booking();
+        Date date=new Date(2023,12,12);
         booking.setBookingDate(Calendar.getInstance().getTime());
         booking.setFlightId(1L);
         booking.setCustomerId(1L);
@@ -59,16 +60,37 @@ public class GuestBookingServiceIntegrationTest {
 
     }
 
+    @Test
+    @Order(1)
+    public void testCanCreateFlight() {
+        Response rep=   given().
+                contentType(ContentType.JSON).
+                body(flight).
+                when()
+                .post("/flight/createFlight").
+                then().
+                statusCode(201)
+                .extract().response();
+
+        Long flightId=rep.jsonPath().getLong("id");
+        flight.setId(flightId);
+        booking.setFlightId(flight.getId());
+    }
 
     @Test
     @Order(1)
     public void testCanCreateGuestBooking() {
-        given().
+        Response rep = given().
                 contentType(ContentType.JSON).
-                body(guestBooking).
+                body(booking).
                 when()
-                .post().
+                .post("/flightbooking/createBooking").
                 then().
-                statusCode(201);
+                statusCode(201)
+                .extract().response();
+        Long id = rep.jsonPath().getLong("id");
+        booking.setCustomer(customer);
+        booking.setFlight(flight);
+        booking.setId(id);
     }
 }

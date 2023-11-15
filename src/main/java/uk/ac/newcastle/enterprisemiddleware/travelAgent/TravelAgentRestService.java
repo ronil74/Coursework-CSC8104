@@ -15,8 +15,6 @@ import uk.ac.newcastle.enterprisemiddleware.flight.Flight;
 import uk.ac.newcastle.enterprisemiddleware.flight.FlightService;
 import uk.ac.newcastle.enterprisemiddleware.hotel.HotelBooking;
 import uk.ac.newcastle.enterprisemiddleware.hotel.HotelBookingService;
-import uk.ac.newcastle.enterprisemiddleware.hotel2.HotelBooking2;
-import uk.ac.newcastle.enterprisemiddleware.hotel2.HotelBookingService2;
 import uk.ac.newcastle.enterprisemiddleware.taxi.Taxi;
 import uk.ac.newcastle.enterprisemiddleware.taxi.TaxiBooking;
 import uk.ac.newcastle.enterprisemiddleware.taxi.TaxiBookingService;
@@ -60,8 +58,6 @@ public class TravelAgentRestService {
     @Inject
     TravelAgentService travelAgentService;
 
-    @RestClient
-    HotelBookingService2 hotelBookingService2;
     @Inject
     private UserTransaction userTransaction;
 
@@ -73,6 +69,11 @@ public class TravelAgentRestService {
     }
 
 
+    /**
+     * <p>Creates a new object from the values provided. Performs validation and will return a JAX-RS response with
+     * @param travelAgent The tra object, constructed automatically from JSON input, to be <i>created</i> via
+     * @return A Response indicating the outcome of the create operation
+     */
     @POST
     @Operation(description = "Add a new TravelAgent to the database")
     @APIResponses(value = {
