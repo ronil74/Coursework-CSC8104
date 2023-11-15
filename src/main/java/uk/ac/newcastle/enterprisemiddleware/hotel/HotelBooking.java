@@ -3,6 +3,7 @@ package uk.ac.newcastle.enterprisemiddleware.hotel;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+
 /**
  * <p>Simple POJO representing HotelBooking objects</p>
  *
@@ -16,7 +17,7 @@ public class HotelBooking implements Serializable {
     private int hotelId;
     private int customerId;
 
-//    public String getHotelName() {
+    //    public String getHotelName() {
 //        return hotelName;
 //    }
 //

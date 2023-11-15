@@ -23,6 +23,10 @@ public class HotelRestService {
    @RestClient
     HotelService hotelService;
 
+    /**
+     *
+     * @return List of all hotels created
+     */
     @GET
     @Path("/hotels")
     @Operation(summary = "Fetch all hotels", description = "Returns a JSON array of all stored hotels objects.")

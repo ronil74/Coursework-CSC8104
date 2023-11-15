@@ -31,7 +31,7 @@ public class TravelAgentBooking implements Serializable {
     @Column(name = "taxiId")
     private int taxiId;
 
-//    public Long getCustomerId() {
+    //    public Long getCustomerId() {
 //        return customerId;
 //    }
 //

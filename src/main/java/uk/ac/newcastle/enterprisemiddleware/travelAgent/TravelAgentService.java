@@ -17,10 +17,20 @@ public class TravelAgentService {
 
     @Inject
     TravelAgentRepository travelAgentRepository;
+
+    /**
+     * List all the bookings done by travel agent
+     * @return travelAgentBookings
+     */
     public List<TravelAgentBooking> findAll() {
         return travelAgentRepository.findAll();
     }
 
+    /**
+     *
+     * @param id
+     * @return Booking by id
+     */
     public TravelAgentBooking findById(Long id) {
         return travelAgentRepository.findById(id);
     }
@@ -29,10 +39,22 @@ public class TravelAgentService {
 //        return travelAgentRepository.findByCustomer(customerId);
 //    }
 
+    /**
+     *
+     * @param booking
+     * @return response of created travelAgentBooking
+     * @throws Exception
+     */
     public TravelAgentBooking create(TravelAgentBooking booking) throws Exception {
         return travelAgentRepository.create(booking);
     }
 
+    /**
+     *
+     * @param booking
+     * @return Response of operation
+     * @throws Exception
+     */
     public TravelAgentBooking delete(TravelAgentBooking booking) throws Exception {
         return travelAgentRepository.delete(booking);
     }

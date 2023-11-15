@@ -37,6 +37,11 @@ public class TravelAgentRepository {
         return query.getResultList();
     }
 
+    /**
+     * 
+     * @param id
+     * @return TraveAgentBooking objects
+     */
     public TravelAgentBooking findById(Long id) {
         return em.find(TravelAgentBooking.class, id);
     }

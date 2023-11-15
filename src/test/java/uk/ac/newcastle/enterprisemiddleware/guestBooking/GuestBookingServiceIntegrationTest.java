@@ -50,7 +50,7 @@ public class GuestBookingServiceIntegrationTest {
 
         booking = new Booking();
         Date date=new Date(2023,12,12);
-        booking.setBookingDate(Calendar.getInstance().getTime());
+        booking.setBookingDate(date);
         booking.setFlightId(1L);
         booking.setCustomerId(1L);
 
@@ -74,23 +74,21 @@ public class GuestBookingServiceIntegrationTest {
 
         Long flightId=rep.jsonPath().getLong("id");
         flight.setId(flightId);
-        booking.setFlightId(flight.getId());
+       booking.setFlightId(flight.getId());
     }
 
     @Test
     @Order(1)
     public void testCanCreateGuestBooking() {
-        Response rep = given().
+        System.out.println(guestBooking);
+       given().
                 contentType(ContentType.JSON).
-                body(booking).
+                body(guestBooking).
                 when()
-                .post("/flightbooking/createBooking").
+                .post("/api").
                 then().
-                statusCode(201)
-                .extract().response();
-        Long id = rep.jsonPath().getLong("id");
-        booking.setCustomer(customer);
-        booking.setFlight(flight);
-        booking.setId(id);
+                statusCode(201);
+
+
     }
 }

@@ -61,8 +61,11 @@ public class TravelAgentRestService {
     @Inject
     private UserTransaction userTransaction;
 
+    /**
+     * @return A Response containing a list of TravelAgentBooking
+     */
     @GET
-    @Operation(summary = "Fetch all TravelAgent", description = "Returns a JSON array of all stored TravelAgent objects.")
+    @Operation(summary = "Fetch all TravelAgentBooking", description = "Returns a JSON array of all stored TravelAgent objects.")
     public Response retrieveAll() {
         List<TravelAgentBooking> travelAgentBookings = travelAgentService.findAll();
         return Response.ok(travelAgentBookings).build();
@@ -75,7 +78,7 @@ public class TravelAgentRestService {
      * @return A Response indicating the outcome of the create operation
      */
     @POST
-    @Operation(description = "Add a new TravelAgent to the database")
+    @Operation(description = "Add a new TravelAgentBooking to the database")
     @APIResponses(value = {
             @APIResponse(responseCode = "201", description = "Travel Agent Booking created successfully."),
             @APIResponse(responseCode = "400", description = "Invalid Agent supplied in request body"),
@@ -144,6 +147,14 @@ public class TravelAgentRestService {
     }
 
 
+    /**
+     * <p>Deletes a TravelAgentBooking using the ID provided. If the ID is not present then nothing can be deleted.</p>
+     *
+     * <p>Will return a JAX-RS response with either 204 NO CONTENT or with a map of fields, and related errors.</p>
+     *
+     * @param id The Long parameter value provided as the id of the TravelAgentBooking to be deleted
+     * @return A Response indicating the outcome of the delete operation
+     */
     @DELETE
     @Path("/deleteTravelAgentBooking/{id:[0-9]+}")
     @Operation(description = "Delete TravelAgent to the database")

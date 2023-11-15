@@ -32,16 +32,5 @@ public class GuestBooking implements Serializable {
 
 
 
-//    public Flight getFlight() {
-//        return flight;
-//    }
-//
-//    public void setFlight(Flight flight) {
-//        this.flight = flight;
-//    }
-//
-//    @NotNull
-//    private Flight flight;
-
 
 }

@@ -21,6 +21,10 @@ public class TaxiRestService {
     @RestClient
     TaxiService taxiService;
 
+    /**
+     *
+     * @return List of taxis
+     */
     @GET
     @Path("/taxis")
     @Operation(summary = "Fetch all hotels", description = "Returns a JSON array of all stored flight objects.")

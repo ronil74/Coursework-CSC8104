@@ -5,7 +5,7 @@ package uk.ac.newcastle.enterprisemiddleware.taxi;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 /**
- * <p>Simple POJO representing AreaCode objects</p>
+ * <p>Simple POJO representing Taxi objects</p>
  *
  * @author Ronil
  */

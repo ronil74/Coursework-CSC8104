@@ -10,20 +10,34 @@ import java.util.List;
 public interface HotelService {
 
 
-        @GET
-        List<Hotel> hotel();
+    /**
+     * @return list of hotels
+     */
+    @GET
+    List<Hotel> hotel();
 
-        @GET
-        @Path("/{id:[0-9]+}")
-        Hotel getHotelById(@PathParam("id") long id);
+    /**
+     * @param id
+     * @return hotel associated to id
+     */
+    @GET
+    @Path("/{id:[0-9]+}")
+    Hotel getHotelById(@PathParam("id") long id);
 
-        @POST
-        Hotel createHotel(Hotel hotel);
+    /**
+     * @param hotel
+     * @return response of hotel creation
+     */
+    @POST
+    Hotel createHotel(Hotel hotel);
 
-        @DELETE
-        @Path("/{id:[0-9]+}")
-        Hotel deleteHotel(@PathParam("id") long id);
-
+    /**
+     * @param id
+     * @return response
+     */
+    @DELETE
+    @Path("/{id:[0-9]+}")
+    Hotel deleteHotel(@PathParam("id") long id);
 
 
 }
