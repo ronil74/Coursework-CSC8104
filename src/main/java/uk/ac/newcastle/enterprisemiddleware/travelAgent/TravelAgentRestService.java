@@ -103,7 +103,7 @@ public class TravelAgentRestService {
             Booking booking=travelAgent.getFlight();
             booking.setId(null);
             bookingService.create(booking);
-            System.out.println(booking);
+//            System.out.println(booking);
             //Error Prone
 //            TaxiBooking taxiBooking= travelAgent.getTaxiBooking();
 //            taxiBooking.setTaxi(travelAgent.getTaxiBooking().getTaxi());
@@ -115,24 +115,23 @@ public class TravelAgentRestService {
 //            hotelBooking2=hotelBookingService2.createHotelBooking2(travelAgent.getHotelBooking2());
 
 
-            System.out.println("128");
+//            System.out.println("128");
             HotelBooking hotelBooking;
-            System.out.println(travelAgent.getHotelBooking());
+//            System.out.println(travelAgent.getHotelBooking());
             hotelBooking=hotelBookingService.createHotelBooking(travelAgent.getHotelBooking());
 
 
             travelAgentBooking.setId(null);
             travelAgentBooking.setFlightId(booking.getId());
-            System.out.println(travelAgent.getFlight().getFlightId());
+//            System.out.println(travelAgent.getFlight().getFlightId());
             travelAgentBooking.setHotelId(hotelBooking.getId());
-            System.out.println("error on 137 taxi");
+//            System.out.println("error on 137 taxi");
 
             travelAgentBooking.setBookingDate(travelAgent.getBookingDate());
 
 
             travelAgentBooking.setTaxiId(taxiBooking.getId());
-//            travelAgentBooking.setTaxiId(1L);
-//            travelAgentBooking.setHotel2Id(hotelBooking2.getId());
+
 
             travelAgentBooking = travelAgentService.create(travelAgentBooking);
             builder = Response.status(Response.Status.CREATED).entity(travelAgentBooking);
@@ -173,14 +172,14 @@ public class TravelAgentRestService {
         Response.ResponseBuilder builder;
 
         try {
-            System.out.println("172 line");
-            System.out.println(travelAgentBooking.getFlightId());
+//            System.out.println("172 line");
+//            System.out.println(travelAgentBooking.getFlightId());
             Booking booking=bookingService.findById(travelAgentBooking.getFlightId());
-            System.out.println(booking);
+//            System.out.println(booking);
             bookingService.delete(booking);
-            System.out.println("175 line");
+//            System.out.println("175 line");
             hotelBookingService.deleteHotelBooking(travelAgentBooking.getHotelId());
-            System.out.println("179 line");
+//            System.out.println("179 line");
 
 //            hotelBookingService2.deleteHotelBooking2(travelAgentBooking.getHotel2Id());
             taxiBookingService.deleteTaxiBooking(travelAgentBooking.getTaxiId());

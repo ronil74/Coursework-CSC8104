@@ -47,6 +47,7 @@ public class GuestBookingServiceIntegrationTest {
         customer.setName("Testron");
         customer.setEmail("test@gmail.com");
         customer.setPhoneNumber("09890448159");
+        customer.setId(1L);
 
         booking = new Booking();
         Date date=new Date(2023,12,12);
@@ -54,8 +55,8 @@ public class GuestBookingServiceIntegrationTest {
         booking.setFlightId(1L);
         booking.setCustomerId(1L);
 
-        guestBooking.setCustomer(customer);
-        guestBooking.setBooking(booking);
+
+
 
 
     }
@@ -75,11 +76,16 @@ public class GuestBookingServiceIntegrationTest {
         Long flightId=rep.jsonPath().getLong("id");
         flight.setId(flightId);
        booking.setFlightId(flight.getId());
+        guestBooking.setBooking(booking);
+        customer.setId(1L);
+        guestBooking.setCustomer(customer);
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     public void testCanCreateGuestBooking() {
+        System.out.println(customer);
+        System.out.println(booking);
         System.out.println(guestBooking);
        given().
                 contentType(ContentType.JSON).

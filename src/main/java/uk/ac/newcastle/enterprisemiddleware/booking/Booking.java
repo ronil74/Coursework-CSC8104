@@ -68,7 +68,6 @@ public class Booking implements Serializable {
     }
 
     @NotNull
-//    @Past(message = "Booking date could not be empty")
     @Column(name = "bookingdate")
     @Future(message ="Date Of Booking can not be in the past")
     @Temporal(TemporalType.DATE)
